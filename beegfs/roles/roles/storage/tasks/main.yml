@@ -1,0 +1,28 @@
+- name: Install storage server
+  apt: name=beegfs-storage state=present
+
+- name: Setup configuration files
+  lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^storeStorageDirectory' line='storeStorageDirectory = {{ storage_dir }}'
+- lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^sysMgmtdHost' line="sysMgmtdHost = {{ mgmt_host }}"
+- lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
+- lineinfile: dest=/etc/beegfs/interface line='{{ network_interface }}' create=yes
+
+- name: Optimize storage performance (not using lineinfile because it doesn't respect sudo)
+  command: "echo deadline > /sys/block/{{ storage_device }}/queue/scheduler"
+- command: "echo 4096 > /sys/block/{{ storage_device }}/queue/nr_requests"
+- command: "echo 4096 > /sys/block/{{ storage_device }}/queue/read_ahead_kb"
+- command: "echo 5 > /proc/sys/vm/dirty_background_ratio"
+- command: "echo 10 > /proc/sys/vm/dirty_ratio"
+- command: "echo 50 > /proc/sys/vm/vfs_cache_pressure"
+- command: "echo 262144 > /proc/sys/vm/min_free_kbytes"
+
+- name: Mount the storage drive
+  mount: 
+    src: /dev/{{ storage_device }}
+    name: "{{ storage_dir }}" 
+    state: mounted
+    fstype: xfs
+    opts: noatime,nodiratime,logbufs=8,logbsize=256k,largeio,inode64,swalloc,allocsize=131072k
+
+- name: Start storage service
+  service: name=beegfs-storage state=restarted

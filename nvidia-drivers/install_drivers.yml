@@ -1,0 +1,5 @@
+---
+- hosts: drivers
+  become: yes
+  roles:
+    - drivers

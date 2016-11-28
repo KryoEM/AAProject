@@ -1,0 +1,16 @@
+- name: Install client
+  apt: name=beegfs-client state=present
+  
+- name: Configure the client and create mount point
+  file: path={{ mount_point }} state=directory
+- lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmt_host }}'
+- copy: dest=/etc/beegfs/beegfs-mounts.conf content='{{ mount_point }} /etc/beegfs/beegfs-client.conf'
+- lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
+- lineinfile: dest=/etc/beegfs/interface line='{{ network_interface }}' create=yes
+
+- name: Start the helper service and build the client kernel module
+  command: "service beegfs-client rebuild"
+
+- service: name=beegfs-helperd state=restarted
+- service: name=beegfs-client state=restarted
+

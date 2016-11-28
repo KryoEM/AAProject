@@ -1,0 +1,23 @@
+- name: Install metadata server
+  apt: name=beegfs-meta state=present
+
+- name: Setup configuration files
+  lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^storeMetaDirectory' line='storeMetaDirectory = {{ metadata_dir }}'
+- lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^sysMgmtdHost' line="sysMgmtdHost = {{ mgmt_host }}"
+- lineinfile: dest=/etc/beegfs/beegfs-meta.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
+- lineinfile: dest=/etc/beegfs/interface line='{{ network_interface }}' create=yes
+
+- name: Optimize metadata configuration
+  command: "echo deadline > /sys/block/{{ meta_device }}/queue/scheduler"
+- command: "echo 128 > /sys/block/{{ meta_device }}/queue/nr_requests"
+
+- name: Mount metadata drive
+  mount:
+    src: /dev/{{ meta_device }}
+    name: "{{ metadata_dir }}"
+    state: mounted
+    fstype: ext4
+    opts: noatime,nodiratime
+
+- name: Start metadata service
+  service: name=beegfs-meta state=restarted

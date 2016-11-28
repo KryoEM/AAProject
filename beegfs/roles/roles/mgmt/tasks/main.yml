@@ -1,0 +1,11 @@
+- name: Install management server
+  apt: name=beegfs-mgmtd state=present
+
+- name: Setup configuration files
+  lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^storeMgmtdDirectory' line='storeMgmtdDirectory = {{ mgmt_dir }}'
+- lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmt_host }}'
+- lineinfile: dest=/etc/beegfs/beegfs-mgmtd.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
+- lineinfile: dest=/etc/beegfs/interface line='{{ network_interface }}' create=yes
+
+- name: Start management service
+  service: name=beegfs-mgmtd state=restarted

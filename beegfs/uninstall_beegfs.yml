@@ -1,0 +1,32 @@
+---
+- hosts: storage
+  become: yes
+  tasks:
+    - apt: name=beegfs-storage state=absent purge=yes
+
+- hosts: metadata
+  become: yes
+  tasks:
+    - apt: name=beegfs-meta state=absent purge=yes
+
+- hosts: mgmt
+  become: yes
+  tasks:
+    - apt: name=beegfs-mgmtd state=absent purge=yes
+    
+- hosts: client
+  become: yes
+  tasks:
+    - apt: name=beegfs-client state=absent purge=yes
+
+- hosts: all
+  become: yes
+  tasks:
+    - apt: name={{ item }} state=absent purge=yes
+      with_items:
+        - beegfs-opentk-lib
+        - beegfs-common
+        - beegfs-utils
+        - beegfs-helperd
+    - file: path=/data/beegfs state=absent
+    - shell: "rm -rf /data/beegfs_*/*"

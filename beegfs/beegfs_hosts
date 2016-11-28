@@ -1,0 +1,15 @@
+[mgmt]
+node4
+
+[metadata]
+node4
+
+[storage]
+node1
+node3
+node4
+
+[client]
+node1
+node3
+node4

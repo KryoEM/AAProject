@@ -1,0 +1,22 @@
+- name: Create hosts file with every host
+  lineinfile: dest=/etc/hosts regexp='.*{{ item }}$' line="{{ hostvars[item]['ansible_' ~ network_interface]['ipv4']['address'] }} {{ item }}" state=present
+  with_items: "{{ groups['all'] }}"
+ 
+- name: Add BeeGFS package list and keys
+  get_url: url={{ beegfs_pkglist_url }} dest={{ beegfs_pkglist_dest }}
+- apt_key: url={{ beegfs_key_url }} state=present
+
+- name: Update apt package lists
+  apt:
+    update_cache: yes
+
+- name: Install common packages
+  apt: name={{ item }} state=present
+  with_items:
+    - beegfs-opentk-lib
+    - beegfs-common
+    - beegfs-utils
+    - beegfs-helperd
+
+- name: Start helper service
+  service: name=beegfs-helperd state=restarted

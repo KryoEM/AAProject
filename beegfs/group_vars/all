@@ -1,0 +1,18 @@
+# BeeGFS storage paths
+mgmt_dir: /data/beegfs/beegfs_mgmt
+metadata_dir: /mnt/beegfs_meta
+storage_dir: /mnt/beegfs_storage
+
+mount_point: /mnt/shared
+
+# URLs for BeeGFS repo keys
+beegfs_pkglist_url: http://www.beegfs.com/release/latest-stable/dists/beegfs-deb8.list
+beegfs_pkglist_dest: /etc/apt/sources.list.d # Download the list file to here
+beegfs_key_url: http://www.beegfs.com/release/latest-stable/gpg/DEB-GPG-KEY-beegfs
+
+mgmt_host: node4
+
+# Devices for beegfs
+storage_device: sdc
+meta_device: sdb1
+network_interface: enp129s0f1

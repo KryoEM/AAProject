@@ -1,0 +1,12 @@
+- name: Install storage server
+  apt: name=beegfs-storage state=present
+
+- name: Setup configuration files
+  lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^storeStorageDirectory' line='storeStorageDirectory = {{ storage_dir }}'
+- lineinfile: dest=/etc/beegfs/beegfs-storage.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmt_host }}'
+
+- name: Start storage service
+  service: name=beegfs-storage state=started
+
+#- name: Optimize storage server
+#copy: content="deadline" dest=
