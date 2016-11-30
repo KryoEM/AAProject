@@ -8,6 +8,15 @@
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
 - lineinfile: dest=/etc/beegfs/interface line='{{ network_interface }}' create=yes
 
+- name: Mount the scratch drive
+  file: path={{ scratch_dir }} state=directory
+- mount:
+    src: /dev/{{ scratch_device }}
+    name: "{{ scratch_dir }}"
+    state: mounted
+    fstype: ext4
+    opts: noatime,nodiratime
+
 - name: Start the helper service and build the client kernel module
   command: "service beegfs-client rebuild"
 

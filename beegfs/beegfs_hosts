@@ -6,10 +6,12 @@ node4
 
 [storage]
 node1
+node2
 node3
 node4
 
 [client]
 node1
+node2
 node3
 node4

@@ -12,7 +12,8 @@
 - command: "echo 128 > /sys/block/{{ meta_device }}/queue/nr_requests"
 
 - name: Mount metadata drive
-  mount:
+  file: path={{ metadata_dir }} state=directory
+- mount:
     src: /dev/{{ meta_device }}
     name: "{{ metadata_dir }}"
     state: mounted

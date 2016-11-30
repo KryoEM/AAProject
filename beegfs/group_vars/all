@@ -2,7 +2,7 @@
 mgmt_dir: /data/beegfs/beegfs_mgmt
 metadata_dir: /mnt/beegfs_meta
 storage_dir: /mnt/beegfs_storage
-
+scratch_dir: /mnt/scratch
 mount_point: /mnt/shared
 
 # URLs for BeeGFS repo keys
@@ -13,6 +13,7 @@ beegfs_key_url: http://www.beegfs.com/release/latest-stable/gpg/DEB-GPG-KEY-beeg
 mgmt_host: node4
 
 # Devices for beegfs
-storage_device: sdc
-meta_device: sdb1
+storage_device: sdb
+meta_device: sdc
+scratch_device: sdd
 network_interface: enp129s0f1

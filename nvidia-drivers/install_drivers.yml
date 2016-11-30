@@ -1,5 +1,23 @@
 ---
 - hosts: drivers
   become: yes
-  roles:
-    - drivers
+  tasks:
+    - name: Add graphics driver apt repository
+      apt_repository: repo="ppa:graphics-drivers/ppa"
+
+    - name: Install build tools and refresh apt package list
+      apt: name={{ item }} state=present update_cache=yes
+      with_items:
+        - build-essential
+        - dkms
+        - freeglut3-dev
+        - libglu1-mesa-dev
+
+    - name: Install drivers
+      apt: name={{ driver_pkg }} state=present
+
+    - name: Set up cuda environment
+      file: path={{ cuda_env_script }} state=touch
+    - lineinfile: dest={{ cuda_env_script }} line="export PATH=$PATH:/usr/local/cuda/bin"
+    - lineinfile: dest={{ cuda_env_script }} line="export CUDADIR=/usr/local/cuda"
+    - lineinfile: dest={{ cuda_env_script }} line="export GLPATH=/usr/lib"
