@@ -1,0 +1,14 @@
+---
+
+# install OpenMPI packages
+
+- name: Install OpenMPI
+  apt: 
+    name: "{{ item }}"
+    state: latest
+  with_items:
+    - openmpi-bin
+    - openmpi-common
+    - openssh-client
+    - openssh-server
+    - libopenmpi-dev

@@ -1,0 +1,49 @@
+- name: install all build dependencies
+  include: build_depends.yaml
+
+
+
+- name: check if CUDA installed 
+  stat:
+    path: "{{cuda_dir}}"
+  register: cuda_path
+
+- name: if CUDA not found
+  debug:
+    msg: "Could not find CUDA. Relion will not be installed with GPU support. Expected path CUDA directory: {{cuda_dir}} If CUDA is installed on your system, please edit the var file to the correct path."
+  when: not cuda_path.stat.exists
+
+
+- name: create individual software directories
+  file:
+    state: directory
+    path: "{{ item }}"
+  with_items:
+    - "{{relion_install_dir}}"
+    - "{{unblur_install_dir}}"
+    - "{{summovie_install_dir}}"
+    - "{{ctffind4_install_dir}}"
+    - "{{gctf_install_dir}}"
+    - "{{resmap_install_dir}}"
+
+
+
+- name: check if Relion 2.0 is installed
+  stat:
+    path: "{{relion_exe_path}}"
+  register: relion_path
+
+- name: if Relion 2.0 already installed
+  when: relion_path.stat.exists
+  debug:
+    msg: "Relion 2.0 is already installed, with an executable at {{relion_exe_path}} If you want to re-do the installation, please delete the existing installation folder. If you want to upgrade Relion 2.0 to a newer release, please change the release number in the var file."
+
+- name: install Relion 2.0 if it is not installed
+  when: not relion_path.stat.exists
+  include: install_relion_base.yaml
+
+
+
+
+- name: install auxiliary software
+  include: install_aux.yaml

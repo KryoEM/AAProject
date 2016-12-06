@@ -1,0 +1,23 @@
+# Dependencies required on all machines in order to successfully install Relion + associated software (MotionCorr, Unblur, CTFFIND4, ResMap)
+
+---
+- name: Install build dependencies
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - build-essential #required for C++ compiler & auxillary packages to use in building Relion
+    - make #required for building Relion
+    - cmake #required for configuring Relion
+    - unzip #required for auxiliary software
+    - tar #required for auxiliary software
+
+
+
+
+
+
+
+

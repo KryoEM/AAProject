@@ -1,0 +1,68 @@
+# variables for installing Relion
+
+
+install_dir: "/mnt/shared/relion/"
+download_dir: "{{install_dir}}downloads/"
+
+
+
+cuda_dir: "/mnt/shared/cuda/cuda-8.0/"
+
+
+# To upgrade any of these programs to a newer release, change the indicated installation directory and/or the expected executable path.
+
+
+# links and paths for installation of Relion
+relion_repo: "https://bitbucket.org/tcblab/relion2-beta.git"
+relion_download_dir: "{{download_dir}}relion2-beta/"
+relion_build_dir: "{{relion_download_dir}}build/"
+relion_install_dir: "{{ install_dir }}Relion2.0/relion2.0.2/"
+relion_exe_path: "{{relion_install_dir}}bin/relion"
+
+
+
+# links and paths for installation of MotionCorr
+motioncorr_dl_link: "http://cryoem.ucsf.edu/software/motioncorr_v2.1.tar"
+motioncorr_install_dir: "{{install_dir}}MotionCorr/"
+motioncorr_src_dir: "{{ motioncorr_install_dir }}motioncorr_v2.1/src/"
+
+
+
+
+# links and paths for installion of Unblur and Summovie
+unblur_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/unblur_1.0.2.tar.gz"
+unblur_install_dir: "{{install_dir}}Unblur/"
+unblur_exe_path: "{{unblur_install_dir}}unblur_1.0.2/bin/unblur_openmp_7_17_15.exe"
+
+summovie_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/summovie_1.0.2.tar.gz"
+summovie_install_dir: "{{install_dir}}Summovie/"
+summovie_exe_path: "{{summovie_install_dir}}summovie_1.0.2/bin/sum_movie_openmp_7_17_15.exe"
+
+
+
+
+
+# links and paths for installion of Ctffind
+ctffind_install_dir: "{{install_dir}}CtfFind/"
+
+ctffind4_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/ctffind-4.1.5-linux64.tar.gz"
+ctffind4_install_dir: "{{ctffind_install_dir}}ctffind4.1.5/"
+ctffind4_exe_path: "{{ctffind4_install_dir}}bin/ctffind"
+
+
+
+
+
+# links and paths for installion of Gctf
+gctf_dl_link: "http://www.mrc-lmb.cam.ac.uk/kzhang/Gctf/Gctf_v1.06_and_examples.tar.gz"
+gctf_install_dir: "{{install_dir}}Gctf/"
+gctf_exe_path: "{{gctf_install_dir}}Gctf_v1.06/bin/Gctf-v1.06_sm_30_cu8.0_x86_64"
+
+
+
+
+
+# links and paths for installion of ResMap
+resmap_dl_link: "http://downloads.sourceforge.net/project/resmap/ResMap-1.1.4-linux64?r=&ts=1480697023"
+resmap_install_dir: "{{install_dir}}ResMap/"
+resmap_exe_path: "{{resmap_install_dir}}ResMap-1.1.4-linux64"

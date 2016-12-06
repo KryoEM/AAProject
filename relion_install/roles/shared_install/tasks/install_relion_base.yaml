@@ -1,0 +1,45 @@
+---
+
+# Base installation of RELION 2.0 beta, without any auxillary software (e.g. motion correction, ctf estimation, etc.)
+
+- name: relion - clone relion
+  git: 
+    repo: "{{ relion_repo }}"
+    dest: "{{ relion_download_dir }}"
+
+- name: relion - create empty build dir
+# if build directory exists; remove it
+  file:
+    state: absent
+    path: "{{relion_build_dir }}"
+  file: 
+    state: directory
+    path: "{{relion_build_dir }}"
+
+
+- name: relion - configure build
+  # options:
+  # double precision on/off -DDoublePrec_GPU=ON
+  # set computer version of CUDA-capable device (i.e. GPU) -DCUDA_ARCH=61
+  # system-wide install location -DCMAKE_INSTALL_PREFIX={{ relion_install_dir }}
+  shell: cmake -DCUDA_ARCH=61 -DCUDA_TOOLKIT_ROOT_DIR="{{cuda_dir}}" -DCMAKE_INSTALL_PREFIX={{relion_install_dir}} .. > cmake.out
+  args:
+    chdir: "{{relion_build_dir }}"
+
+- debug:
+    msg: "configuration output written to: {{relion_build_dir}}cmake.out"
+
+
+- name: relion - make build 
+  shell: make > make.out
+  args:
+    chdir: "{{relion_build_dir }}"
+
+- debug:
+    msg: "build output written to: {{relion_build_dir}}make.out"
+
+# only if install directory is different from build directory
+- name: relion - install
+  command: make install
+  args:
+    chdir: "{{relion_build_dir }}"
