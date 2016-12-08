@@ -3,10 +3,9 @@
     path: "{{cuda_dir}}"
   register: cuda_path
 
-- name: if CUDA not found
+- when: not cuda_path.stat.exists
   debug:
     msg: "Could not find CUDA. Relion will not be installed with GPU support. Expected path CUDA directory: {{cuda_dir}} If CUDA is installed on your system, please edit the var file to the correct path."
-  when: not cuda_path.stat.exists
 
 
 - name: create individual software directories
@@ -28,8 +27,7 @@
     path: "{{relion_exe_path}}"
   register: relion_path
 
-- name: if Relion 2.0 already installed
-  when: relion_path.stat.exists
+- when: relion_path.stat.exists
   debug:
     msg: "Relion 2.0 is already installed, with an executable at {{relion_exe_path}} If you want to re-do the installation, please delete the existing installation folder. If you want to upgrade Relion 2.0 to a newer release, please change the release number in the var file."
 
@@ -42,3 +40,8 @@
 
 - name: install auxiliary software
   include: install_aux.yaml
+
+
+
+
+

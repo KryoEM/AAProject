@@ -1,19 +1,21 @@
 ---
-# install OpenMPI on all machines
-- hosts: all
+- name: Install OpenMPI and build dependencies on all machines
+  hosts: machines
   become: yes
   roles:
+    - updated_apt_cache
     - openmpi
     - build_depends
 
-# install Relion and associated software on a shared drive using the local host.
-- hosts: installer
+- name: Install Relion and auxiliary software on shared drive
+  hosts: installer
   become: yes
   roles:
     - shared_relion
 
 # set up the environment variables for all machines
-- hosts: all
+- name: Set up the environment variables for all machines
+  hosts: machines
   become: yes
   roles:
     - relion_env

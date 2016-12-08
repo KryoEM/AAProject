@@ -25,6 +25,7 @@ relion_exe_path: "{{relion_install_dir}}bin/relion"
 motioncorr_dl_link: "http://cryoem.ucsf.edu/software/motioncorr_v2.1.tar"
 motioncorr_install_dir: "{{install_dir}}MotionCorr/"
 motioncorr_src_dir: "{{ motioncorr_install_dir }}motioncorr_v2.1/src/"
+motioncorr_exe_path: "{{motioncorr_install_dir}}motioncorr_v2.1/dosefgpu_driftcorr"
 
 
 
