@@ -2,12 +2,12 @@
 
 # Base installation of RELION 2.0 beta, without any auxillary software (e.g. motion correction, ctf estimation, etc.)
 
-- name: relion - clone relion
+- name: Relion - clone from official repository
   git: 
     repo: "{{ relion_repo }}"
     dest: "{{ relion_download_dir }}"
 
-- name: relion - create empty build dir
+- name: Relion - create a new build directory, overwriting any previous one
 # if build directory exists; remove it
   file:
     state: absent
@@ -17,29 +17,31 @@
     path: "{{relion_build_dir }}"
 
 
-- name: relion - configure build
+- debug:
+    msg: "About to configure Relion. Configuration output and error messages will be written to: {{relion_build_dir}}cmake.out and cmake.err"
+
+- name: Relion - configure build
   # options:
   # double precision on/off -DDoublePrec_GPU=ON
   # set computer version of CUDA-capable device (i.e. GPU) -DCUDA_ARCH=61
   # system-wide install location -DCMAKE_INSTALL_PREFIX={{ relion_install_dir }}
-  shell: cmake -DCUDA_ARCH=61 -DCUDA_TOOLKIT_ROOT_DIR="{{cuda_dir}}" -DCMAKE_INSTALL_PREFIX={{relion_install_dir}} .. > cmake.out
+  shell: cmake -DCUDA_ARCH=61 -DCUDA_TOOLKIT_ROOT_DIR="{{cuda_dir}}" -DCMAKE_INSTALL_PREFIX={{relion_install_dir}} .. > cmake.out 2> cmake.err
   args:
     chdir: "{{relion_build_dir }}"
 
+
 - debug:
-    msg: "configuration output written to: {{relion_build_dir}}cmake.out"
+    msg: "About to build Relion. Build output and error messages will be written to: {{relion_build_dir}}make.out and make.err"
 
-
-- name: relion - make build 
-  shell: make > make.out
+- name: Relion - make build 
+  shell: make > make.out 2> make.err
   args:
     chdir: "{{relion_build_dir }}"
 
-- debug:
-    msg: "build output written to: {{relion_build_dir}}make.out"
 
-# only if install directory is different from build directory
-- name: relion - install
+- name: Relion - install
   command: make install
   args:
     chdir: "{{relion_build_dir }}"
+
+
