@@ -1,8 +1,3 @@
-- name: install all build dependencies
-  include: build_depends.yaml
-
-
-
 - name: check if CUDA installed 
   stat:
     path: "{{cuda_dir}}"

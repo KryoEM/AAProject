@@ -4,15 +4,16 @@
   become: yes
   roles:
     - openmpi
+    - build_depends
 
 # install Relion and associated software on a shared drive using the local host.
-- hosts: localhost
+- hosts: installer
   become: yes
   roles:
-    - shared_install
+    - shared_relion
 
 # set up the environment variables for all machines
 - hosts: all
   become: yes
   roles:
-    - environment
+    - relion_env
