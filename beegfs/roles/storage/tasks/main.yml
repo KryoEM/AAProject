@@ -16,6 +16,12 @@
 - command: "echo 50 > /proc/sys/vm/vfs_cache_pressure"
 - command: "echo 262144 > /proc/sys/vm/min_free_kbytes"
 
+- name: Create the storage filesystem
+  filesystem:
+    fstype: xfs
+    dev: /dev/{{ storage_device }}
+    opts: -d su=128k,sw=8 -l version=2,su=128k -isize=512
+
 - name: Mount the storage drive
   file: path={{ storage_dir }} state=directory
 - mount: 

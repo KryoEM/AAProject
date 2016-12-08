@@ -11,6 +11,15 @@
   command: "echo deadline > /sys/block/{{ meta_device }}/queue/scheduler"
 - command: "echo 128 > /sys/block/{{ meta_device }}/queue/nr_requests"
 
+- name: Create the metadata filesystem
+  filesystem:
+    fstype: ext4
+    dev: /dev/{{ meta_device }}
+    opts: -i 2048 -I 1024 -J size=400 -Odir_index,filetype -L meta
+
+- name: Enable extended attributes on metadata drive
+  command: tune2fs -o user_xattr /dev/{{ meta_device }}
+
 - name: Mount metadata drive
   file: path={{ metadata_dir }} state=directory
 - mount:
