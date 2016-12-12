@@ -19,23 +19,23 @@
 
 
       # Default PDF viewer
-      export RELION_PDFVIEWER_EXECUTABLE evince
+      export RELION_PDFVIEWER_EXECUTABLE=evince
 
       # Default MOTIONCORR executable
-      export RELION_MOTIONCORR_EXECUTABLE {{motioncorr_exe_path}}
+      export RELION_MOTIONCORR_EXECUTABLE={{motioncorr_exe_path}}
 
       # Default UNBLUR/SUMMOVIE executables
-      export RELION_UNBLUR_EXECUTABLE {{unblur_exe_path}}
-      export RELION_SUMMOVIE_EXECUTABLE {{summovie_exe_path}}
+      export RELION_UNBLUR_EXECUTABLE={{unblur_exe_path}}
+      export RELION_SUMMOVIE_EXECUTABLE={{summovie_exe_path}}
 
       # Default CTFFIND executable, version 4.1
-      export RELION_CTFFIND_EXECUTABLE {{ctffind4_exe_path}}
+      export RELION_CTFFIND_EXECUTABLE={{ctffind4_exe_path}}
 
       # Default Gctf executable
-      export RELION_GCTF_EXECUTABLE {{gctf_exe_path}}
+      export RELION_GCTF_EXECUTABLE={{gctf_exe_path}}
 
       # Default ResMap executable
-      export RELION_RESMAP_EXECUTABLE {{resmap_exe_path}}
+      export RELION_RESMAP_EXECUTABLE={{resmap_exe_path}}
 
       # Enforce cluster jobs to occupy entire nodes with 24 hyperthreads
       #export RELION_MINIMUM_DEDICATED 24
