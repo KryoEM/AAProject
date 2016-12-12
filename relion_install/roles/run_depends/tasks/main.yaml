@@ -1,0 +1,11 @@
+# Dependencies required on all machines for running Relion.
+
+---
+- name: Install run dependencies
+  apt:
+    name: "{{item}}"
+    state: latest
+  with_items:
+    - evince # for viewing PDFs from the GUI
+    - pdftk # for running ctffind_plot_results.sh
+    - gnuplot # for running ctffind_plot_results.sh
