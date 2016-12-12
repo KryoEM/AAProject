@@ -1,4 +1,7 @@
-- name: check if CUDA installed 
+- debug:
+    msg: 'NOTE: All software to be installed is version-specific, and the versions are hard-coded in the variables file (relion_install/group_vars/all). The playbook will not install a program if the version in the playbook is already there. This prevents accidentally overwriting pre-existing versions. In order to upgrade versions, please change the hard-coded version in the variables file, and then run the playbook again. A new installation folder will be created for the new version.'
+
+- name: Check if CUDA installed 
   stat:
     path: "{{cuda_dir}}"
   register: cuda_path
@@ -8,12 +11,14 @@
     msg: "Could not find CUDA. Relion will not be installed with GPU support. Expected path CUDA directory: {{cuda_dir}} If CUDA is installed on your system, please edit the var file to the correct path."
 
 
-- name: create individual software directories
+- name: Create individual software directories
   file:
     state: directory
     path: "{{ item }}"
   with_items:
     - "{{relion_install_dir}}"
+    - "{{motioncorr_install_dir}}"
+    - "{{motioncor2_install_dir}}"
     - "{{unblur_install_dir}}"
     - "{{summovie_install_dir}}"
     - "{{ctffind4_install_dir}}"
@@ -22,7 +27,7 @@
 
 
 
-- name: check if Relion 2.0 is installed
+- name: Check if Relion 2.0 is already installed
   stat:
     path: "{{relion_exe_path}}"
   register: relion_path
@@ -31,17 +36,16 @@
   debug:
     msg: "Relion 2.0 is already installed, with an executable at {{relion_exe_path}} If you want to re-do the installation, please delete the existing installation folder. If you want to upgrade Relion 2.0 to a newer release, please change the release number in the var file."
 
-- name: install Relion 2.0 if it is not installed
+- name: Install Relion 2.0 if it is not installed
   when: not relion_path.stat.exists
   include: install_relion_base.yaml
 
 
 
 
-- name: install auxiliary software
+
+- name: Install auxiliary software if not already installed
   include: install_aux.yaml
-
-
 
 
 

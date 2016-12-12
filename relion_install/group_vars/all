@@ -1,11 +1,13 @@
 # variables for installing Relion
 
 
+# shared location where all programs are to be installed
 install_dir: "/mnt/shared/relion/"
 download_dir: "{{install_dir}}downloads/"
 
 
 
+# path to shared cuda toolkit
 cuda_dir: "/mnt/shared/cuda/cuda-8.0/"
 
 
@@ -24,9 +26,15 @@ relion_exe_path: "{{relion_install_dir}}bin/relion"
 # links and paths for installation of MotionCorr
 motioncorr_dl_link: "http://cryoem.ucsf.edu/software/motioncorr_v2.1.tar"
 motioncorr_install_dir: "{{install_dir}}MotionCorr/"
-motioncorr_src_dir: "{{ motioncorr_install_dir }}motioncorr_v2.1/src/"
-motioncorr_exe_path: "{{motioncorr_install_dir}}motioncorr_v2.1/dosefgpu_driftcorr"
+motioncorr_version_dir: "{{motioncorr_install_dir}}motioncorr_v2.1/"
+motioncorr_src_dir: "{{motioncorr_version_dir}}src/"
+motioncorr_exe_path: "{{motioncorr_install_dir}}motioncorr_v2.1/bin/dosefgpu_driftcorr"
 
+
+# links and paths for installation of MotionCor2
+motioncor2_dl_link: "http://msg.ucsf.edu/MotionCor2/MotionCor2-10-19-2016.tar.gz"
+motioncor2_install_dir: "{{install_dir}}MotionCor2"
+motioncor2_exe_path: "{{motioncor2_install_dir}}MotionCor2-10-19-2016"
 
 
 

@@ -3,7 +3,7 @@
 # For any given software, download and installation will be skipped if there is already an executable at the expected path (see var file)
 # To download a new version, change the version number in the var file.
 
-- name: MotionCorr - download and untar source files
+- name: MotionCorr (from Yifan Cheng at UCSF) - download and untar source files
   unarchive:
     src:  "{{motioncorr_dl_link}}"
     dest: "{{motioncorr_install_dir}}"
@@ -13,9 +13,15 @@
 - name: MotionCorr - make build 
   command: make
   args:
-   chdir: "{{ motioncorr_src_dir }}"
-  creates: "{{motioncorr_exe_path}}"
+    chdir: "{{motioncorr_src_dir}}"
+    creates: "{{motioncorr_exe_path}}"
 
+- name: MotionCor2 (by Shawn Zheng at UCSF) - download and untar executable
+  unarchive:
+    src: "{{motioncor2_dl_link}}"
+    dest: "{{motioncor2_install_dir}}"
+    remote_src: yes
+    creates: "{{motioncor2_exe_path}}"
 
 
 - name: unblur - download and untar executable
@@ -32,6 +38,7 @@
     remote_src: yes
     creates: "{{summovie_exe_path}}"
 
+
 - name: CTFFIND4 - download and untar executable
   unarchive:
     src: "{{ctffind4_dl_link }}"
@@ -39,12 +46,14 @@
     remote_src: yes
     creates: "{{ctffind4_exe_path}}"
 
+
 - name: GCTF - download and untar executables
   unarchive:
     src: "{{gctf_dl_link }}"
     dest: "{{gctf_install_dir}}"
     remote_src: yes
     creates: "{{gctf_exe_path}}"
+
 
 - name: RESMAP - download executable
   get_url:
