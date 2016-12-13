@@ -16,6 +16,7 @@
     state: directory
     path: "{{ item }}"
   with_items:
+    - "{{relion_download_dir}}"
     - "{{relion_install_dir}}"
     - "{{motioncorr_install_dir}}"
     - "{{motioncor2_install_dir}}"

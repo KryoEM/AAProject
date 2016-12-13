@@ -2,13 +2,13 @@
 
 
 # shared location where all programs are to be installed
-install_dir: "/mnt/shared/relion/"
+install_dir: "/shared/relion/"
 download_dir: "{{install_dir}}downloads/"
 
 
 
 # path to shared cuda toolkit
-cuda_dir: "/mnt/shared/cuda/cuda-8.0/"
+cuda_dir: "/usr/local/cuda/"
 
 
 # To upgrade any of these programs to a newer release, change the indicated installation directory and/or the expected executable path.

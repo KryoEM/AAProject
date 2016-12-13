@@ -9,8 +9,8 @@
 
 - name: Install Relion and auxiliary software on shared drive
   hosts: installer
-  become: yes
-  become_flags: '-i'
+#  become: yes
+#  become_flags: '-i'
   roles:
     - build_depends
     - shared_relion

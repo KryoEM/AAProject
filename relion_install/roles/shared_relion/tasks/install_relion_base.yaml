@@ -25,7 +25,7 @@
   # double precision on/off -DDoublePrec_GPU=ON
   # set computer version of CUDA-capable device (i.e. GPU) -DCUDA_ARCH=61
   # system-wide install location -DCMAKE_INSTALL_PREFIX={{ relion_install_dir }}
-  shell: cmake -DCUDA_ARCH=61 -DCUDA_TOOLKIT_ROOT_DIR="{{cuda_dir}}" -DCMAKE_INSTALL_PREFIX={{relion_install_dir}} .. > cmake.out 2> cmake.err
+  shell: cmake -DCUDA_ARCH=61 -DCMAKE_INSTALL_PREFIX={{relion_install_dir}} .. > cmake.out 2> cmake.err
   args:
     chdir: "{{relion_build_dir }}"
 
@@ -40,7 +40,15 @@
 
 
 - name: Relion - install
-  command: make install
+  shell: make install > make_install.out 2> make_install.err
   args:
     chdir: "{{relion_build_dir }}"
 
+- name: Relion - copy over FFTW and FLTK libraries
+  copy:
+    src: "{{item}}"
+    dest: "{{relion_install_dir}}lib/"
+    force: no
+  with_fileglob:
+    - "{{relion_download_dir}}external/fftw/lib/lib*"
+    - "{{relion_download_dir}}external/fltk/lib/lib*"
