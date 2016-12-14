@@ -43,12 +43,3 @@
   shell: make install > make_install.out 2> make_install.err
   args:
     chdir: "{{relion_build_dir }}"
-
-- name: Relion - copy over FFTW and FLTK libraries
-  copy:
-    src: "{{item}}"
-    dest: "{{relion_install_dir}}lib/"
-    force: no
-  with_fileglob:
-    - "{{relion_download_dir}}external/fftw/lib/lib*"
-    - "{{relion_download_dir}}external/fltk/lib/lib*"
