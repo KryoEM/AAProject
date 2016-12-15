@@ -9,6 +9,12 @@ download_dir: "{{install_dir}}downloads/"
 
 # path to shared cuda toolkit
 cuda_dir: "/usr/local/cuda/"
+cuda_bin: "{{cuda_dir}}bin/"
+cuda_lib: "{{cuda_dir}}lib64/"
+
+cuda_7p5_dir: "/shared/cuda/cuda-7.5/"
+cuda_7p5_bin: "{{cuda_7p5_dir}}bin/"
+cuda_7p5_lib: "{{cuda_7p5_dir}}lib64/"
 
 
 # To upgrade any of these programs to a newer release, change the indicated installation directory and/or the expected executable path.
@@ -20,6 +26,9 @@ relion_download_dir: "{{download_dir}}relion2-beta/"
 relion_build_dir: "{{relion_download_dir}}build/"
 relion_install_dir: "{{ install_dir }}Relion2.0/relion2.0.2/"
 relion_exe_path: "{{relion_install_dir}}bin/relion"
+
+relion_bin: "{{relion_install_dir}}bin/"
+relion_lib: "{{relion_install_dir}}lib"
 
 
 
@@ -33,8 +42,11 @@ motioncorr_exe_path: "{{motioncorr_install_dir}}motioncorr_v2.1/bin/dosefgpu_dri
 
 # links and paths for installation of MotionCor2
 motioncor2_dl_link: "http://msg.ucsf.edu/MotionCor2/MotionCor2-10-19-2016.tar.gz"
-motioncor2_install_dir: "{{install_dir}}MotionCor2"
-motioncor2_exe_path: "{{motioncor2_install_dir}}MotionCor2-10-19-2016"
+motioncor2_install_dir: "{{install_dir}}MotionCor2/"
+motioncor2_internal_dir: "{{motioncor2_install_dir}}internal/"
+motioncor2_exe_path: "{{motioncor2_internal_dir}}MotionCor2-10-19-2016"
+
+motioncor2_wrapper: "{{motioncor2_install_dir}}MotionCor2_env"
 
 
 

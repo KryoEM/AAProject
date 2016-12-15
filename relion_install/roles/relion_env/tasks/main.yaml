@@ -9,8 +9,8 @@
 
 
       # Set up environment variables for RELION-2.0
-      export PATH=$PATH:{{relion_install_dir}}bin
-      export LD_LIBRARY_PATH={{relion_install_dir}}lib:$LD_LIBRARY_PATH
+      export PATH=$PATH:{{relion_bin}}
+      export LD_LIBRARY_PATH={{relion_lib}}:$LD_LIBRARY_PATH
 
 
       # Set up Relion-specific environment variable for CUDA

@@ -1,6 +1,8 @@
 - debug:
     msg: 'NOTE: All software to be installed is version-specific, and the versions are hard-coded in the variables file (relion_install/group_vars/all). The playbook will not install a program if the version in the playbook is already there. This prevents accidentally overwriting pre-existing versions. In order to upgrade versions, please change the hard-coded version in the variables file, and then run the playbook again. A new installation folder will be created for the new version.'
 
+
+
 - name: Check if CUDA installed 
   stat:
     path: "{{cuda_dir}}"
@@ -19,7 +21,7 @@
     - "{{relion_download_dir}}"
     - "{{relion_install_dir}}"
     - "{{motioncorr_install_dir}}"
-    - "{{motioncor2_install_dir}}"
+    - "{{motioncor2_internal_dir}}"
     - "{{unblur_install_dir}}"
     - "{{summovie_install_dir}}"
     - "{{ctffind4_install_dir}}"
@@ -37,18 +39,19 @@
   debug:
     msg: "Relion 2.0 is already installed, with an executable at {{relion_exe_path}} If you want to re-do the installation, please delete the existing installation folder. If you want to upgrade Relion 2.0 to a newer release, please change the release number in the var file."
 
-- name: Install Relion 2.0 if it is not installed
+- name: Install Relion 2.0
   when: not relion_path.stat.exists
   include: install_relion_base.yaml
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
+    LD_LIBRARY_PATH: "{{cuda_lib}}"
 
-
-- name: Relion - ensure paths to FFTW and FLTK libraries exist
-  shell: "cp -d -n {{relion_download_dir}}external/*/lib/lib* {{relion_install_dir}}lib/"
+#- name: Relion - ensure paths to FFTW and FLTK libraries exist
+#  shell: "cp -d -n {{relion_download_dir}}external/*/lib/lib* {{relion_install_dir}}lib/"
   # -d to preserve links
   # -n no-clobber, will not overwrite existing files
 
 - name: Install auxiliary software if not already installed
   include: install_aux.yaml
-
 
 

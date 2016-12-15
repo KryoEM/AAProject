@@ -3,25 +3,46 @@
 # For any given software, download and installation will be skipped if there is already an executable at the expected path (see var file)
 # To download a new version, change the version number in the var file.
 
-- name: MotionCorr (from Yifan Cheng at UCSF) - download and untar source files
-  unarchive:
-    src:  "{{motioncorr_dl_link}}"
-    dest: "{{motioncorr_install_dir}}"
-    remote_src: yes
-    creates: "{{motioncorr_exe_path}}"
+- name: Check if MotionCorr installed
+  stat:
+    path: "{{motioncorr_exe_path}}"
+  register: motioncorr_path
 
-- name: MotionCorr - make build 
-  command: make
-  args:
-    chdir: "{{motioncorr_src_dir}}"
-    creates: "{{motioncorr_exe_path}}"
+- name: Install MotionCorr
+  when: not motioncorr_path.stat.exists
+  include: install_motioncorr.yaml
+
 
 - name: MotionCor2 (by Shawn Zheng at UCSF) - download and untar executable
   unarchive:
     src: "{{motioncor2_dl_link}}"
-    dest: "{{motioncor2_install_dir}}"
+    dest: "{{motioncor2_internal_dir}}"
     remote_src: yes
     creates: "{{motioncor2_exe_path}}"
+
+- name: MotionCor2 - create wrapper script
+  blockinfile:
+    dest: "{{motioncor2_wrapper}}"
+    create: yes
+    block: |
+      #!/bin/sh
+
+      # Wrapper script for MotionCor2 that sets up proper environment.
+      # Set up CUDA 7.5 environment
+      export PATH={{cuda_7p5_bin}}:$PATH
+      export LD_LIBRARY_PATH={{cuda_7p5_lib}}:$LD_LIBRARY_PATH
+
+      # Run MotionCor2, passing all arguments
+      {{motioncor2_exe_path}} "$@"
+    mode: a+x
+
+- name: MotionCor2 - link libtiff library
+  file:
+    state: link
+    path: /usr/lib/libtiff.so.3
+    src:  /usr/lib/x86_64-linux-gnu/libtiff.so.5
+    follow: yes
+  become: yes
 
 
 - name: unblur - download and untar executable
