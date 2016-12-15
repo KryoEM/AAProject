@@ -36,15 +36,6 @@
       {{motioncor2_exe_path}} "$@"
     mode: a+x
 
-- name: MotionCor2 - link libtiff library
-  file:
-    state: link
-    path: /usr/lib/libtiff.so.3
-    src:  /usr/lib/x86_64-linux-gnu/libtiff.so.5
-    follow: yes
-  become: yes
-
-
 - name: unblur - download and untar executable
   unarchive:
     src: "{{unblur_dl_link }}"

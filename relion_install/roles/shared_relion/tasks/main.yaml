@@ -46,10 +46,13 @@
     PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
     LD_LIBRARY_PATH: "{{cuda_lib}}"
 
-#- name: Relion - ensure paths to FFTW and FLTK libraries exist
-#  shell: "cp -d -n {{relion_download_dir}}external/*/lib/lib* {{relion_install_dir}}lib/"
+- name: Relion - ensure paths to FFTW and FLTK libraries exist
+  shell: "cp -d -n {{relion_download_dir}}external/*/lib/lib* {{relion_install_dir}}lib/"
   # -d to preserve links
   # -n no-clobber, will not overwrite existing files
+
+
+
 
 - name: Install auxiliary software if not already installed
   include: install_aux.yaml

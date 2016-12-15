@@ -1,4 +1,4 @@
-# Creates a machine-wide bash profile script that sets all Relion environment variables. 
+# Set up environment variables and links on all machines for running Relion.
 ---
 - name: Setup Relion environment variables for entire machine.
   blockinfile:
@@ -47,3 +47,10 @@
       #export RELION_WARNING_LOCAL_MPI 12
 
 
+- name: Link libtiff library for MotionCor2
+  file:
+    state: link
+    path: /usr/lib/libtiff.so.3
+    src:  /usr/lib/x86_64-linux-gnu/libtiff.so.5
+    follow: yes
+  become: yes
