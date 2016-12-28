@@ -1,53 +1,73 @@
 ---
 # Install auxiliary software that Relion uses -- e.g. for motion correction, ctf estimation, local resolution estimation, etc.
+# For any given software, download and installation will be skipped if there is already an executable at the expected path (see var file)
+# To download a new version, change the version number in the var file.
+
+- name: Check if MotionCorr installed
+  stat:
+    path: "{{motioncorr_exe_path}}"
+  register: motioncorr_path
+
+- name: Install MotionCorr
+  when: not motioncorr_path.stat.exists
+  include: install_motioncorr.yaml
 
 
+- name: MotionCor2 (by Shawn Zheng at UCSF) - download and untar executable
+  unarchive:
+    src: "{{motioncor2_dl_link}}"
+    dest: "{{motioncor2_internal_dir}}"
+    remote_src: yes
+    creates: "{{motioncor2_exe_path}}"
 
-#    - name: MotionCorr - download and untar
-#      get_url:
-#        url: "{{motioncorr_dl_link }}"
-#        dest: "{{ motioncorr_install_dir  }}"
+- name: MotionCor2 - create wrapper script
+  blockinfile:
+    dest: "{{motioncor2_wrapper}}"
+    create: yes
+    block: |
+      #!/bin/sh
 
-#     unarchive:
-#       src:  "{{motioncorr_dl_link }}"
-#       dest: "{{install_dir }}"
-#       remote_src: yes
-#       creates: "{{motioncorr_exe_path}}"
+      # Wrapper script for MotionCor2 that sets up proper environment.
+      # Set up CUDA 7.5 environment
+      export PATH={{cuda_7p5_bin}}:$PATH
+      export LD_LIBRARY_PATH={{cuda_7p5_lib}}:$LD_LIBRARY_PATH
 
-#  - name: MotionCorr - make build 
-#    command: make
-#    args:
-#        chdir: "{{ motioncorr_src_dir }}"
+      # Run MotionCor2, passing all arguments
+      {{motioncor2_exe_path}} "$@"
+    mode: a+x
 
-- name: unblur - download and untar
+- name: unblur - download and untar executable
   unarchive:
     src: "{{unblur_dl_link }}"
     dest: "{{unblur_install_dir}}"
     remote_src: yes
     creates: "{{unblur_exe_path}}"
 
-- name: summovie - download and untar
+- name: summovie - download and untar executable
   unarchive:
     src: "{{summovie_dl_link }}"
     dest: "{{summovie_install_dir}}"
     remote_src: yes
     creates: "{{summovie_exe_path}}"
 
-- name: CTFFIND4 - download and untar
+
+- name: CTFFIND4 - download and untar executable
   unarchive:
     src: "{{ctffind4_dl_link }}"
     dest: "{{ctffind4_install_dir}}"
     remote_src: yes
     creates: "{{ctffind4_exe_path}}"
 
-- name: GCTF - download and untar   
+
+- name: GCTF - download and untar executables
   unarchive:
     src: "{{gctf_dl_link }}"
     dest: "{{gctf_install_dir}}"
     remote_src: yes
     creates: "{{gctf_exe_path}}"
 
-- name: RESMAP - download
+
+- name: RESMAP - download executable
   get_url:
     url: "{{resmap_dl_link }}"
     dest: "{{resmap_exe_path}}"

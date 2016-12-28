@@ -8,6 +8,12 @@
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
 - lineinfile: dest=/etc/beegfs/interface line='{{ network_interface }}' create=yes
 
+- name: Create the scratch filesystem
+  filesystem:
+    fstype: ext4
+    dev: /dev/{{ scratch_device }}
+    opts: -i 2048 -I 1024 -J size=400 -Odir_index,filetype -L scratch
+
 - name: Mount the scratch drive
   file: path={{ scratch_dir }} state=directory
 - mount:

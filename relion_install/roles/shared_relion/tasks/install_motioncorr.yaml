@@ -1,0 +1,19 @@
+---
+
+
+- name: MotionCorr (from Yifan Cheng at UCSF) - download and untar source files
+  unarchive:
+    src:  "{{motioncorr_dl_link}}"
+    dest: "{{motioncorr_install_dir}}"
+    remote_src: yes
+
+- debug:
+    msg: "About to build MotionCorr from source. Build output and error messages will be written to: {{motioncorr_src_dir}}make.out and make.err"
+
+- name: MotionCorr - make build 
+  shell: make > make.out 2> make.err
+  args:
+    chdir: "{{motioncorr_src_dir}}"
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
+    LD_LIBRARY_PATH: "{{cuda_lib}}"
