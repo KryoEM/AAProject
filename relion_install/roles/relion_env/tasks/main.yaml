@@ -1,6 +1,6 @@
 # Set up environment variables and links on all machines for running Relion.
 ---
-- name: Setup Relion environment variables for entire machine.
+- name: Setup local Relion environment variables for each machine.
   blockinfile:
     dest: /etc/profile.d/relion.sh
     create: yes

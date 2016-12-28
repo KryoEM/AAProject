@@ -9,12 +9,14 @@
 
 - name: Install Relion and auxiliary software on shared drive
   hosts: installer
-#  become: yes
-#  become_flags: '-i'
   roles:
     - build_depends
     - shared_relion
 
+- name: Install IMOD
+  hosts: installer
+  roles:
+    - shared_imod
 
 # set up the environment variables for all machines
 - name: Set up the environment variables for all machines
@@ -22,3 +24,4 @@
   become: yes
   roles:
     - relion_env
+    - imod_env
