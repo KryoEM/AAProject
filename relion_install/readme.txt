@@ -1,5 +1,8 @@
 Ansible playbook for automated installation of Relion and associated software packages for a set of GPU-capable machines. The playbook is designed so that core packages will be installed on a shared drive, but all machines will be configured with the correct environments and dependencies to run the packages.
 
+To run playbook use command:
+
+ansible-playbook -i relion_hosts relion_install.yaml --ask-sudo-pass
 
 The playbook was tested on servers with Ubuntu 16.04.
 
