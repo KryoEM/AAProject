@@ -87,3 +87,10 @@ gctf_exe_path: "{{gctf_install_dir}}Gctf_v1.06/bin/Gctf-v1.06_sm_30_cu8.0_x86_64
 resmap_dl_link: "http://downloads.sourceforge.net/project/resmap/ResMap-1.1.4-linux64?r=&ts=1480697023"
 resmap_install_dir: "{{install_dir}}ResMap/"
 resmap_exe_path: "{{resmap_install_dir}}ResMap-1.1.4-linux64"
+
+
+
+# links and paths for installation of IMOD
+imod_dl_link: "http://bio3d.colorado.edu/imod/AMD64-RHEL5/imod_4.7.15_RHEL6-64_CUDA6.0.csh"
+imod_install_dir: "/shared/imod/"
+imod_installer_name: "imod_4.7.15_RHEL6-64_CUDA6.0.csh"

@@ -1,0 +1,31 @@
+---
+
+- name: IMOD - create software directory
+  file:
+    state: directory
+    path: "{{ imod_install_dir }}"
+
+
+- name: Check if IMOD installer downloaded
+  stat:
+    path: "{{imod_install_dir}}{{imod_installer_name}}"
+  register: imod_installer_path
+
+- name: IMOD - download
+  get_url:
+    url: "{{ imod_dl_link }}"
+    dest: "{{ imod_install_dir }}"
+  when: not imod_installer_path.stat.exists
+
+- name: Check if IMOD installation exists
+  stat:
+    path: "{{imod_install_dir}}IMOD/bin/"
+  register: imod_bin_path
+
+
+- name: IMOD - install
+  shell: "csh -f {{ imod_installer_name }} -dir {{ imod_install_dir}} -skip -yes > install.out 2> install.err"
+  args:
+    chdir: "{{ imod_install_dir }}"
+  become: yes
+  when: not imod_bin_path.stat.exists
