@@ -1,0 +1,12 @@
+---
+# Setup environment scripts for running Anaconda
+
+- name: Setup local Anaconda environment variables
+  blockinfile:
+    dest: /etc/profile.d/anaconda.sh
+    create: yes
+    block: |
+      #!/bin/sh
+
+
+      export PATH="{{conda_install_dir}}bin":$PATH”

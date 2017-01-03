@@ -6,16 +6,11 @@
     path: "{{ imod_install_dir }}"
 
 
-- name: Check if IMOD installer downloaded
-  stat:
-    path: "{{imod_install_dir}}{{imod_installer_name}}"
-  register: imod_installer_path
-
 - name: IMOD - download
   get_url:
     url: "{{ imod_dl_link }}"
     dest: "{{ imod_install_dir }}"
-  when: not imod_installer_path.stat.exists
+    checksum: "{{ imod_dl_checksum }}"
 
 - name: Check if IMOD installation exists
   stat:

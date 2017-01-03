@@ -1,4 +1,4 @@
-# Set up environment variables and links on all machines for running Relion.
+# Set up environment variables and links for running Relion.
 ---
 - name: Setup local Relion environment variables for each machine.
   blockinfile:

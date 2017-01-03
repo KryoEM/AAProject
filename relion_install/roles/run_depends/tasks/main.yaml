@@ -6,8 +6,9 @@
     name: "{{item}}"
     state: latest
   with_items:
-    - evince # for viewing PDFs from the GUI
-    - pdftk # for running ctffind_plot_results.sh
-    - gnuplot # for running ctffind_plot_results.sh
-    - tcsh # for IMOD
-    - libjpeg62 #for IMOD
+    - evince      # for viewing PDFs from the GUI
+    - pdftk       # for running ctffind_plot_results.sh
+    - gnuplot     # for running ctffind_plot_results.sh
+    - tcsh        # for IMOD
+    - libjpeg62   # for IMOD
+    - lbzip2      # for processing zipped files in parallel; e.g. for unblur_tbz.py

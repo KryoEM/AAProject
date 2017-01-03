@@ -1,6 +1,6 @@
-# Set up environment variables and links on all machines for running IMOD.
+# Set up environment variables and links for running IMOD.
 ---
-- name: Setup local IMOD environment variables for each machine.
+- name: Setup local IMOD environment variables
   copy:
     dest: /etc/profile.d/IMOD-linux.sh
     src: "{{ imod_install_dir }}IMOD/IMOD-linux.sh"

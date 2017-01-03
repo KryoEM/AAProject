@@ -92,5 +92,30 @@ resmap_exe_path: "{{resmap_install_dir}}ResMap-1.1.4-linux64"
 
 # links and paths for installation of IMOD
 imod_dl_link: "http://bio3d.colorado.edu/imod/AMD64-RHEL5/imod_4.7.15_RHEL6-64_CUDA6.0.csh"
+imod_dl_checksum: "sha256:b938416944a5860f6930a399ea044d4ef0241280fe46c55240ba3901d5e1a01e"
 imod_install_dir: "/shared/imod/"
 imod_installer_name: "imod_4.7.15_RHEL6-64_CUDA6.0.csh"
+
+
+
+# links and paths for installation of Python-related software
+python_dir: "/shared/python/"
+python_dl_dir: "{{ python_dir }}download/"
+
+
+#links and paths for installatio of Anaconda
+conda_dl_link: "https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh"
+conda_dl_checksum: "sha256:beee286d24fb37dd6555281bba39b3deb5804baec509a9dc5c69185098cf661a"
+
+conda_dl_dir: "{{ python_dl_dir}}anaconda_installer/"
+
+conda_installer: "Anaconda2-4.2.0-Linux-x86_64.sh"
+conda_install_dir: "{{ python_dir }}Anaconda2-4.2.0/"
+
+
+# links and paths for installation of mpi4py
+mpi4py_repo: "https://github.com/mpi4py/mpi4py.git"
+
+mpi4py_dl_dir: "{{ python_dl_dir }}mpi4py/mpi4py.git"
+mpi4py_install_dir: "{{ python_dir }}mpi4py/"
+mpi4py_lib_path: "{{mpi4py_install_dir}}lib/python2.7/site-packages/mpi4py"

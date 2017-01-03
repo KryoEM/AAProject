@@ -7,16 +7,27 @@
     - openmpi
     - run_depends
 
+- name: Install dependencies for building and installation of other software
+  hosts: installer
+  become: yes
+  roles:
+    - build_depends
+
+
 - name: Install Relion and auxiliary software on shared drive
   hosts: installer
   roles:
-    - build_depends
     - shared_relion
 
 - name: Install IMOD
   hosts: installer
   roles:
     - shared_imod
+
+- name: Install Anaconda
+  hosts: installer
+  roles:
+    - shared_python
 
 # set up the environment variables for all machines
 - name: Set up the environment variables for all machines
@@ -25,3 +36,4 @@
   roles:
     - relion_env
     - imod_env
+    - python_env

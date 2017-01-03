@@ -1,0 +1,23 @@
+---
+
+
+- name: Clone mpi4py
+  git:
+    clone: yes
+    repo: "{{ mpi4py_repo }}"
+    dest: "{{ mpi4py_dl_dir }}"
+
+- name: Make a clean build directory
+  file:
+    state: absent
+    path: "{{ mpi4py_dl_dir }}build/"
+
+- name: Build mpi4py
+  shell: "python setup.py build > ../mpi4py_build.out 2> ../mpi4py_build.err"
+  args:
+    chdir: "{{ mpi4py_dl_dir }}"
+
+- name: Install mpi4py
+  shell: "python setup.py install --prefix {{ mpi4py_install_dir }} > ../mpi4py_install.out 2> ../mpi4py_install.err"
+  args:
+    chdir: "{{ mpi4py_dl_dir }}"

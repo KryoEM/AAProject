@@ -1,4 +1,5 @@
-# Dependencies required on all machines in order to successfully install Relion + associated software (MotionCorr, Unblur, CTFFIND4, ResMap)
+# Dependencies required for building and installing, but not running.
+# In other words, these dependencies only need to be on the host doing the installations.
 
 ---
 - name: Install build dependencies
@@ -6,12 +7,12 @@
     name: "{{ item }}"
     state: latest
   with_items:
-    - build-essential #required for C++ compiler & auxillary packages to use in building Relion
-    - make #required for building Relion
-    - cmake #required for configuring Relion
-    - unzip #required for auxiliary software
-    - tar #required for auxiliary software
-
+    - build-essential # required for C++ compiler & auxillary packages to use in building Relion
+    - make # required for building Relion
+    - cmake # required for configuring Relion
+    - unzip # required for auxiliary software
+    - tar # required for auxiliary software
+    - cython # required for building mpi4py
 
 
 
