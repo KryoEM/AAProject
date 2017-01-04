@@ -9,4 +9,4 @@
       #!/bin/sh
 
 
-      export PATH="{{conda_install_dir}}bin":$PATH”
+      export PATH="{{ conda_bin }}:$PATH"
