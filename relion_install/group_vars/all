@@ -20,15 +20,36 @@ cuda_7p5_lib: "{{cuda_7p5_dir}}lib64/"
 # To upgrade any of these programs to a newer release, change the indicated installation directory and/or the expected executable path.
 
 
+
+
+
+
+
 # links and paths for installation of Relion
-relion_repo: "https://bitbucket.org/tcblab/relion2-beta.git"
+
+# repository to use to install Relion; select only one
+
+# official repository
+#relion_repo: "https://bitbucket.org/tcblab/relion2-beta.git"
+#relion_repo_ver: 'HEAD'
+
+# custom repository
+relion_repo: "https://github.com/KryoEM/relion2.git"
+relion_repo_ver: 'tbzmotion'
+
+# CHANGE THIS IF UPDATING VERSIONS
+relion_install_dir: "{{ install_dir }}Relion2.0/relion2.0.2_custom/"
+
+
 relion_download_dir: "{{download_dir}}relion2-beta/"
 relion_build_dir: "{{relion_download_dir}}build/"
-relion_install_dir: "{{ install_dir }}Relion2.0/relion2.0.2/"
 relion_exe_path: "{{relion_install_dir}}bin/relion"
-
 relion_bin: "{{relion_install_dir}}bin/"
-relion_lib: "{{relion_install_dir}}lib"
+relion_lib: "{{relion_install_dir}}lib/"
+relion_python: "{{relion_install_dir}}python/"
+
+
+
 
 
 
@@ -40,6 +61,10 @@ motioncorr_src_dir: "{{motioncorr_version_dir}}src/"
 motioncorr_exe_path: "{{motioncorr_install_dir}}motioncorr_v2.1/bin/dosefgpu_driftcorr"
 
 
+
+
+
+
 # links and paths for installation of MotionCor2
 motioncor2_dl_link: "http://msg.ucsf.edu/MotionCor2/MotionCor2-10-19-2016.tar.gz"
 motioncor2_install_dir: "{{install_dir}}MotionCor2/"
@@ -47,6 +72,10 @@ motioncor2_internal_dir: "{{motioncor2_install_dir}}internal/"
 motioncor2_exe_path: "{{motioncor2_internal_dir}}MotionCor2-10-19-2016"
 
 motioncor2_wrapper: "{{motioncor2_install_dir}}MotionCor2_env"
+
+
+
+
 
 
 
@@ -63,12 +92,17 @@ summovie_exe_path: "{{summovie_install_dir}}summovie_1.0.2/bin/sum_movie_openmp_
 
 
 
+
+
+
 # links and paths for installion of Ctffind
 ctffind_install_dir: "{{install_dir}}CtfFind/"
 
 ctffind4_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/ctffind-4.1.5-linux64.tar.gz"
 ctffind4_install_dir: "{{ctffind_install_dir}}ctffind4.1.5/"
 ctffind4_exe_path: "{{ctffind4_install_dir}}bin/ctffind"
+
+
 
 
 
@@ -83,10 +117,19 @@ gctf_exe_path: "{{gctf_install_dir}}Gctf_v1.06/bin/Gctf-v1.06_sm_30_cu8.0_x86_64
 
 
 
+
+
 # links and paths for installion of ResMap
 resmap_dl_link: "http://downloads.sourceforge.net/project/resmap/ResMap-1.1.4-linux64?r=&ts=1480697023"
 resmap_install_dir: "{{install_dir}}ResMap/"
 resmap_exe_path: "{{resmap_install_dir}}ResMap-1.1.4-linux64"
+
+
+
+
+
+
+
 
 
 
@@ -98,12 +141,19 @@ imod_installer_name: "imod_4.7.15_RHEL6-64_CUDA6.0.csh"
 
 
 
+
+
+
+
+
+
 # links and paths for installation of Python-related software
 python_dir: "/shared/python/"
 python_dl_dir: "{{ python_dir }}download/"
 
 
-#links and paths for installatio of Anaconda
+
+#links and paths for installation of Anaconda
 conda_dl_link: "https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh"
 conda_dl_checksum: "sha256:beee286d24fb37dd6555281bba39b3deb5804baec509a9dc5c69185098cf661a"
 

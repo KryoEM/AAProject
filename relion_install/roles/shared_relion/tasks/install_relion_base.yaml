@@ -1,13 +1,14 @@
 ---
 
-# Base installation of RELION 2.0 beta, without any auxillary software (e.g. motion correction, ctf estimation, etc.)
+# Base installation of RELION 2.0, without any auxillary software (e.g. motion correction, ctf estimation, etc.)
 
-- name: Relion - clone from official repository
+- name: Relion - clone from repository
   git: 
     repo: "{{ relion_repo }}"
+    version: "{{ relion_repo_ver }}"
     dest: "{{ relion_download_dir }}"
 
-- name: Relion - create a new build directory, overwriting any previous one
+- name: Relion - create a new build directory
 # if build directory exists; remove it
   file:
     state: absent

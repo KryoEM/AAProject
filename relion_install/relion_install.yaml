@@ -14,6 +14,11 @@
     - build_depends
 
 
+- name: Install Anaconda
+  hosts: installer
+  roles:
+    - shared_python
+
 - name: Install Relion and auxiliary software on shared drive
   hosts: installer
   roles:
@@ -24,10 +29,6 @@
   roles:
     - shared_imod
 
-- name: Install Anaconda
-  hosts: installer
-  roles:
-    - shared_python
 
 # set up the environment variables for all machines
 - name: Set up the environment variables for all machines

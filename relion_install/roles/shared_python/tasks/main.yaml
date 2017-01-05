@@ -37,9 +37,12 @@
 
 
 # requires pip to have been installed by Anaconda 
-- name: Install mpi4py
+- name: Install Python packages mpi4py and simplejson
   pip:
-    name: mpi4py
+    name: "{{ item }}"
     state: latest
+  with_items:
+    - mpi4py
+    - simplejson
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ conda_bin }}"

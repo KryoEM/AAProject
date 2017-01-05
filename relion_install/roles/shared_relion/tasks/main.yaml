@@ -53,6 +53,21 @@
 
 
 
+- name: Relion - check for custom Python scripts
+  stat:
+    path: "{{ relion_download_dir }}python/"
+  register: relion_dl_python_check
+
+- name: Relion - copy custom Python scripts to installation directory
+  synchronize:
+    src: "{{ relion_download_dir }}python/"
+    dest: "{{ relion_python }}"
+    recursive: yes
+    delete: yes
+  when: relion_dl_python_check.stat.exists
+
+
+
 
 - name: Install auxiliary software if not already installed
   include: install_aux.yaml

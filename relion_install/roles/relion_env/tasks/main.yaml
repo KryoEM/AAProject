@@ -1,6 +1,6 @@
 # Set up environment variables and links for running Relion.
 ---
-- name: Setup local Relion environment variables for each machine.
+- name: Setup local Relion environment variables
   blockinfile:
     dest: /etc/profile.d/relion.sh
     create: yes
@@ -45,6 +45,27 @@
 
       # Ask for confirmation if users try to submit local jobs with more than 12 MPI nodes
       #export RELION_WARNING_LOCAL_MPI 12
+
+
+- name: Check for custom Python scripts
+  stat:
+    path: "{{ relion_python }}"
+  register: relion_python_check
+
+
+- name: Setup local environment variables for Relion python scripts
+  blockinfile:
+    dest: /etc/profile.d/relion_custom.sh
+    create: yes
+    block: |
+      #!/bin/sh
+
+
+      # Set up environment variables for RELION-2.0
+      export PATH=$PATH:{{ relion_python }}
+      export PYTHONPATH=$PYTHONPATH:{{ relion_python }}
+  when: relion_python_check.stat.exists
+
 
 
 - name: Link libtiff library for MotionCor2
