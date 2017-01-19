@@ -21,3 +21,22 @@
     - lineinfile: dest={{ cuda_env_script }} line="export PATH=$PATH:/usr/local/cuda/bin"
     - lineinfile: dest={{ cuda_env_script }} line="export CUDADIR=/usr/local/cuda"
     - lineinfile: dest={{ cuda_env_script }} line="export GLPATH=/usr/lib"
+
+- hosts: installer
+  become: yes
+  tasks:
+    - name: Check if CUDA exists
+      stat: path=/usr/local/cuda
+      register: p
+      
+    - name: Download cuda if it doesn't exist
+      get_url: url={{ cuda_dl }} dest=/tmp/installer.run mode=0755
+      when: p.stat.exists
+      
+    - name: Run the installer command
+      command: ./tmp/installer.run --silent --toolkit --samples --samplespath={{ cuda_install_dir }}/samples --override
+      when: p.stat.exists
+      
+    - name: Symlink cuda install dir to /usr/local/cuda
+      file: src={{ cuda_install_dir }} dest={{ cuda_install_link }} state=link
+      when: p.stat.exists

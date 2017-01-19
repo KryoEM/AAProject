@@ -1,2 +1,0 @@
-driver_pkg: nvidia-367
-cuda_env_script: /etc/profile.d/cuda.sh

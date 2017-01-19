@@ -1,3 +1,6 @@
+[installer]
+node4
+
 [drivers]
 node1
 node2

@@ -1,0 +1,7 @@
+driver_pkg: nvidia-367
+cuda_env_script: /etc/profile.d/cuda.sh
+
+# CUDA toolkit directory
+cuda_install_dir: /shared/cuda-8.0
+cuda_install_link: /usr/local/cuda
+cuda_dl: https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda_8.0.44_linux-run
