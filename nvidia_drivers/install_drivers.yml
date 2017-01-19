@@ -34,7 +34,7 @@
       when: p.stat.exists
       
     - name: Run the installer command
-      command: ./tmp/installer.run --silent --toolkit --samples --samplespath={{ cuda_install_dir }}/samples --override
+      command: /tmp/installer.run --silent --toolkit --samples --samplespath={{ cuda_install_dir }}/samples --override
       when: p.stat.exists
       
     - name: Symlink cuda install dir to /usr/local/cuda
