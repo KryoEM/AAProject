@@ -1,3 +1,4 @@
+
 # variables for installing Relion
 
 
@@ -47,8 +48,7 @@ relion_exe_path: "{{relion_install_dir}}bin/relion"
 relion_bin: "{{relion_install_dir}}bin/"
 relion_lib: "{{relion_install_dir}}lib/"
 relion_python: "{{relion_install_dir}}python/"
-
-
+relion_env_script: "/etc/profile.d/relion.sh"
 
 
 
@@ -160,3 +160,5 @@ conda_dl_checksum: "sha256:beee286d24fb37dd6555281bba39b3deb5804baec509a9dc5c691
 conda_installer: "Anaconda2-4.2.0-Linux-x86_64.sh"
 conda_install_dir: "{{ python_dir }}Anaconda2-4.2.0/"
 conda_bin: "{{ conda_install_dir }}bin"
+
+

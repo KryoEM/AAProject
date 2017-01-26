@@ -1,0 +1,113 @@
+---
+# Runs a sanity check for Relion using a down-sized unit test.
+
+- set_fact:
+    scratch: "/scratch/relion_install_sane/"
+    test_dir: "/shared/relion/sanity_test/"
+
+- set_fact:
+    cl3d_dir: "{{ test_dir }}Class3D/"
+    data_dir: "{{ test_dir }}data/"
+
+- set_fact:
+    test_particles_dir: "{{ data_dir }}Particles/"
+    test_particles: "{{ data_dir }}shiny_particles_10k_bin16.star"
+    test_ref: "{{ data_dir }}5A1A_4A_bin16_box64.mrc"
+
+- set_fact:
+    hostfile: "cl3d.hosts"
+    cl3d_script: "cl3d_it2.sh"
+    check_script: "cl3d_it2_check.py"
+
+- set_fact:
+    HOST_COUNT: "{{ groups['machines'] | length }}"
+
+
+
+
+- debug:
+    msg: "To ensure that everything is working with the installation of Relion, a sanity check will be performed by running two iterations of 3D classification across all machines."
+
+
+- name: Sanity check - clear testing directory and scratch space
+  file:
+    state: absent
+    path: "{{ item }}"
+  with_items:
+    - "{{ scratch }}"
+    - "{{ test_dir }}"
+
+
+- name: Sanity check - create new testing directory and scratch space
+  file:
+    state: directory
+    path: "{{ item }}"
+  with_items:
+    - "{{ scratch }}"
+    - "{{ cl3d_dir }}"
+    - "{{ data_dir }}"
+
+
+- name: Sanity check - download testing data set (~150MB)
+  git:
+    repo: https://github.com/KryoEM/unittest_tiny.git
+    dest: "{{ data_dir }}"
+
+- name: Sanity check - untar testing data set
+  unarchive:
+    src: "{{ data_dir }}unittest_tiny.tar.gz"
+    dest: "{{ data_dir }}"
+
+- name: Sanity check - update pointers to testing data
+  replace:
+    dest: "{{ test_particles }}"
+    regexp: 'Particles/'
+    replace: "{{ test_particles_dir }}"
+
+
+# automatically determine how many machines there are, scale mpirun up to that number, and also create a hosts file listing all of them for mpirun to use
+- name: Sanity check - create testing scripts and mpirun hostfile from templates
+  template:
+    src: "{{ item }}.j2"
+    dest: "{{ test_dir }}/{{ item }}"
+    mode: 0755
+  with_items:
+    - "{{ hostfile }}"
+    - "{{ cl3d_script }}"
+    - "{{ check_script }}"
+
+- name: Initializing Relion sanity check
+  debug:
+    msg: "About to run sanity check -- this may take several minutes. If the run fails or if the subsequent checks fail, you can troubleshoot the output at {{ test_dir }}"
+
+
+- name: Sanity check - run two iterations of Class3D
+  shell: "./{{ cl3d_script }}"
+  args:
+    chdir: "{{ test_dir }}"
+
+
+- name: Sanity check - Class3D output files to check
+  stat:
+    path: "{{ item }}"
+  with_items:
+    - "{{ cl3d_dir }}run_it002_class001_angdist.bild"
+    - "{{ cl3d_dir }}run_it002_class001.mrc"
+    - "{{ cl3d_dir }}run_it002_model.star"
+  register: cl3d_it002_stat 
+
+- name: Sanity check - ensure Class3D output files were produced
+  assert:
+    that:
+      - item.stat.exists
+      - item.stat.size > 0      
+    msg: "Could not find expected output file or the file is empty: {{ item }}"
+  with_items: "{{ cl3d_it002_stat.results }}"
+  no_log: true #logging turned off due to frighteningly high verbosity of output
+
+
+# run python script to check model.star file
+- name: Sanity check - ensure output map is ~20A
+  shell: "python cl3d_it2_check.py"
+  args:
+    chdir: "{{ test_dir }}"

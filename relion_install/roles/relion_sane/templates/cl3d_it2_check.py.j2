@@ -1,0 +1,33 @@
+# coding=utf-8
+
+model_path = "{{ cl3d_dir }}run_it002_model.star"
+
+
+with open(model_path) as model_file:
+	for l in model_file:
+		line = l.split()
+
+		# skip blank lines
+		if not line:
+			continue
+
+		# save pertinent values
+		if line[0] == '_rlnCurrentResolution':
+			res = float(line[1])
+		if line[0] == '_rlnAveragePmax':
+			pmax = float(line[1])
+
+		# stop reading model file once we are past the header
+		if line[0] == 'data_model_classes':
+			break
+
+# if we could not register the values we wanted
+if not res and not pmax:
+	print "Cannot read model file. Make sure path and contents are correct."
+
+assert res > 15 and res < 30, \
+	"Expected resolution between 30-15Å after two iterations of 3D classification. Actual resolution: " + res
+assert pmax > 0 and pmax < 1, \
+	"Expected average Pmax value to be between 0 and 1. Actual value: " + pmax
+
+

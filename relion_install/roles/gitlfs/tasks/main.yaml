@@ -1,0 +1,13 @@
+---
+# Install Git LFS if it is not already present
+
+
+
+- name: Check for Git extension Large File Storage
+  shell: git lfs install
+  register: gitlfs_stat
+  ignore_errors: yes
+
+- name: Install Git LFS
+  include: gitlfs.yaml
+  when: gitlfs_stat.rc > 0

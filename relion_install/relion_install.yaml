@@ -38,3 +38,8 @@
     - relion_env
     - imod_env
     - python_env
+
+- name: Sanity check
+  hosts: installer
+  roles:
+    - relion_sane
