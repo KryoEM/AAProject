@@ -46,6 +46,11 @@
     PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
     LD_LIBRARY_PATH: "{{cuda_lib}}"
 
+- name: "Verify FFTW and FLTK lib exist"
+  file:
+    path: "{{relion_install_dir}}lib/"
+    state: directory
+
 - name: Relion - ensure paths to FFTW and FLTK libraries exist
   shell: "cp -d -n {{relion_download_dir}}external/*/lib/lib* {{relion_install_dir}}lib/"
   # -d to preserve links

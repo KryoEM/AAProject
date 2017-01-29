@@ -1,9 +1,10 @@
 
 # variables for installing Relion
-
+shared_dir: "/home/okuybeda/shared"
+scratch_dir: "/home/okuybeda/scratch"
 
 # shared location where all programs are to be installed
-install_dir: "/shared/relion/"
+install_dir: "{{shared_dir}}/relion/"
 download_dir: "{{install_dir}}downloads/"
 
 
@@ -13,7 +14,7 @@ cuda_dir: "/usr/local/cuda/"
 cuda_bin: "{{cuda_dir}}bin/"
 cuda_lib: "{{cuda_dir}}lib64/"
 
-cuda_7p5_dir: "/shared/cuda/cuda-7.5/"
+cuda_7p5_dir: "{{shared_dir}}/cuda/cuda-7.5/"
 cuda_7p5_bin: "{{cuda_7p5_dir}}bin/"
 cuda_7p5_lib: "{{cuda_7p5_dir}}lib64/"
 
@@ -136,7 +137,7 @@ resmap_exe_path: "{{resmap_install_dir}}ResMap-1.1.4-linux64"
 # links and paths for installation of IMOD
 imod_dl_link: "http://bio3d.colorado.edu/imod/AMD64-RHEL5/imod_4.7.15_RHEL6-64_CUDA6.0.csh"
 imod_dl_checksum: "sha256:b938416944a5860f6930a399ea044d4ef0241280fe46c55240ba3901d5e1a01e"
-imod_install_dir: "/shared/imod/"
+imod_install_dir: "{{shared_dir}}/imod/"
 imod_installer_name: "imod_4.7.15_RHEL6-64_CUDA6.0.csh"
 
 
@@ -148,7 +149,7 @@ imod_installer_name: "imod_4.7.15_RHEL6-64_CUDA6.0.csh"
 
 
 # links and paths for installation of Python-related software
-python_dir: "/shared/python/"
+python_dir: "{{shared_dir}}/python/"
 python_dl_dir: "{{ python_dir }}download/"
 
 
