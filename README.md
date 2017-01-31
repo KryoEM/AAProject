@@ -1,6 +1,9 @@
 ## AAProject
 Accelerate and automate the RELION 2.0 workflow
 
+### Setting up Ansible
+This repository contains the Ansible playbooks we use to configure our servers. Before they are run, Ansible needs to be properly configured on a master node and all of the worker nodes. This process is explained on our wiki [here](https://github.com/KryoEM/AAProject/wiki/Configuring-Ansible)
+
 ### Directory structure
 Each of the folders represents a different ansible playbook:
 
