@@ -14,15 +14,16 @@
     - build_depends
 
 
-#- name: Install Anaconda
-#  hosts: installer
-#  roles:
-#    - shared_python
+- name: Install Anaconda
+  hosts: installer
+  roles:
+    - shared_python
 
 - name: Install Relion and auxiliary software on shared drive
   hosts: installer
   roles:
     - shared_relion
+
 
 - name: Install IMOD
   hosts: installer
@@ -37,7 +38,10 @@
   roles:
     - relion_env
     - imod_env
-  #  - python_env
+    - python_env
+    - cuda_env
+  tags:
+    - debug
 
 - name: Sanity check
   hosts: installer

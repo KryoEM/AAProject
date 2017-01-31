@@ -1,0 +1,16 @@
+
+# Installs CUDA 8.0 Toolkit
+
+---
+- name: Download CUDA 8.0 Toolkit
+  get_url: 
+    url: "{{ cuda_dl }}"
+    dest: 
+    mode: 0755
+    checksum: "{{ cuda_checksum }}"
+
+- debug:
+    msg: "CUDA 8.0 is about to be installed. If installation fails, please check output and error logs located at {{ cuda_install_dir }}"
+
+- name: Install CUDA 8.0 Toolkit
+  shell: "{{ cuda_installer_path }} --silent --toolkit --toolkitpath={{ cuda_install_dir }} --samples --samplespath={{ cuda_samples_dir }} > {{ cuda_install_dir }}install.out 2> {{ cuda_install_dir }}install.err "

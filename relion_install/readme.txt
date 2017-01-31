@@ -1,17 +1,28 @@
 Ansible playbook for automated installation of Relion and associated software packages for a set of GPU-capable machines. The playbook is designed so that core packages will be installed on a shared drive, but all machines will be configured with the correct environments and dependencies to run the packages.
 
 
-A sample command for running this playbook would be:
 
+Before installing, please edit the group_vars/all file so that the variables correspond to the configurations on your machine. For example, variables listed on in the group_vars/all file include:
+- location of shared directory
+- location of scratch space
+- location of CUDA 8.0 Toolkit installation
+
+
+Then edit the relion_hosts file so that the machines you wish to install a Relion setup on are listed.
+
+
+Finally, you can run the playbook with the command:
 ansible-playbook --i relion_hosts --ask-sudo-pass relion_install.yaml 
+
+
+
+
 
 
 
 
 The playbook was tested on servers with Ubuntu 16.04.
 
-
-To edit the machines that will have access to Relion, add them to the list of 'machine' hosts in the file 'relion_hosts' and run the playbook. If an installation already exists of the software packages, the playbook will only configure the new machine.
 
 
 This playbook is designed to never overwrite existing installations, so that you cannot accidentally replace an existing software package with a newer version that could be buggy. For each software package, the playbook will check for an existing executable path and if it already exists, it will skip over the download and/or installation of new software.
@@ -25,5 +36,4 @@ If a file exists at the executable path specified in the variables file, the pla
 
 To re-do the installation of a given software package, delete the package's folder on the shared drive before running the playbook.
 
-
-To change the location of the shared drive, pointers to the CUDA toolkit location, simply change the corresponding variables in the 'group_vars/all' file.
+If an installation already exists of the software packages, the playbook will only configure the new machine.

@@ -1,0 +1,21 @@
+# Sets up local environment so that CUDA can be found by Relion
+
+---
+
+- name: Symlink cuda install dir to /usr/local/cuda
+  file: 
+    src: "{{ cuda_install_dir }}"
+    dest: "{{ cuda_symlink }}"
+    state: link
+
+
+- name: Set up local profile to include CUDA environment variables 
+  blockinfile:
+    dest: "{{ cuda_env_script }}"
+    create: yes
+    block: |
+      #!/bin/sh
+
+      export PATH=$PATH:/usr/local/cuda/bin
+      export CUDADIR=/usr/local/cuda
+      export CUDADIR=/usr/local/cuda
