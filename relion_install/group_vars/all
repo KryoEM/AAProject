@@ -39,9 +39,9 @@ cuda_env_script: "/etc/profile.d/cuda.sh"
 
 
 # Cuda 7.5 locations
-#cuda_7p5_dir: "{{shared_dir}}/cuda/cuda-7.5/"
-#cuda_7p5_bin: "{{cuda_7p5_dir}}bin/"
-#cuda_7p5_lib: "{{cuda_7p5_dir}}lib64/"
+cuda_7p5_dir: "{{shared_dir}}/cuda/cuda-7.5/"
+cuda_7p5_bin: "{{cuda_7p5_dir}}bin/"
+cuda_7p5_lib: "{{cuda_7p5_dir}}lib64/"
 
 
 

@@ -1,13 +1,14 @@
 # Sets up local environment so that CUDA can be found by Relion
 
 ---
+- debug:
+    msg: "{{ hostvars.localhost.nvcc80 }}"
 
 - name: Symlink cuda install dir to /usr/local/cuda
   file: 
     src: "{{ cuda_install_dir }}"
     dest: "{{ cuda_symlink }}"
     state: link
-
 
 - name: Set up local profile to include CUDA environment variables 
   blockinfile:
