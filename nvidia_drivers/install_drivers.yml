@@ -1,0 +1,22 @@
+---
+
+
+- name: Install build dependencies
+  hosts: machines
+  roles:
+    - build_depends
+
+- name: Install graphics drivers
+  hosts: machines
+  roles:
+    - drivers
+
+- name: Install CUDA 8.0 Toolkit
+  hosts: installer
+  roles:
+    - cuda80
+
+- name: Set up local environments for CUDA
+  hosts: machines
+  roles:
+    - cuda_env

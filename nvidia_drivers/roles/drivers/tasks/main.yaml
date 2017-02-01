@@ -1,0 +1,17 @@
+# Install graphics drivers
+
+---
+
+
+- name: Add graphics driver apt repository
+  apt_repository: 
+    repo: "{{ driver_ppa }}"
+  become: yes
+
+
+- name: Install drivers
+  apt: 
+    name: "{{ driver_pkg }}"
+    state: present
+    update_cache: yes
+  become: yes

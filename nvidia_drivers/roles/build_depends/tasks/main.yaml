@@ -1,0 +1,13 @@
+---
+
+- name: Install build tools and refresh apt package list
+  apt: 
+    name: "{{ item }}"
+    state: present
+    update_cache: yes
+  with_items:
+    - build-essential
+    - dkms
+    - freeglut3-dev
+    - libglu1-mesa-dev
+  become: yes

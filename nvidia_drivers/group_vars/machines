@@ -1,0 +1,10 @@
+driver_pkg: nvidia-367
+driver_ppa: ppa:graphics-drivers/ppa
+
+
+
+
+
+cuda_symlink: "/usr/local/cuda"
+
+cuda_env_script: "/etc/profile.d/cuda.sh"

@@ -1,0 +1,13 @@
+cuda_dl: https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda_8.0.44_linux-run
+cuda_dl_checksum: 6dca912f9b7e2b7569b0074a41713640
+
+
+cuda_installer_path: "{{ downloads_dir }}cuda_installer.run"
+cuda_samples_dir: "{{ cuda_install_dir }}CUDA-8.0_Samples/"
+
+
+
+
+
+cuda_bin: "{{cuda_install_dir}}bin/"
+cuda_lib: "{{cuda_install_dir}}lib64/"
