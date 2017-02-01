@@ -7,14 +7,17 @@
     LD_LIBRARY_PATH: "{{cuda_lib}}"
   ignore_errors: true # do not stop playbook if CUDA not found
 
+
+# if cuda found
 - debug:
     msg: "CUDA 8.0 found. Skipping installation of CUDA 8.0 Toolkit."
   when: nvcc_80|succeeded
 
 
 
-- debug:
-    msg: "CUDA 8.0 was not found when checking with command 'nvcc --version', using location {{cuda_install_dir}}. If you know you have CUDA 8.0 installed on your system, change the variable 'cuda_install_dir' in the playbook inventory. Otherwise, CUDA 8.0 Toolkit will now be installed."
+# if cuda not found
+- pause:
+    prompt: "CUDA 8.0 was not found when checking with command 'nvcc --version', using location {{cuda_install_dir}} found in playbook inventory file. Playbook will attempt installation of CUDA 8.0 Toolkit. Press 'enter' to continue. Press 'ctrl+c' and then 'a' to abort."
   when: nvcc_80|failed
 
 - name: Install CUDA
