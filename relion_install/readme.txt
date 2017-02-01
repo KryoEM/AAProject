@@ -16,6 +16,8 @@ ansible-playbook --i relion_hosts --ask-sudo-pass relion_install.yaml
 
 
 
+The playbook was tested on servers with Ubuntu 16.04.
+
 
 
 

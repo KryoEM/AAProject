@@ -4,13 +4,16 @@
 
 
 - name: Check if CUDA installed 
-  stat:
-    path: "{{cuda_dir}}"
-  register: cuda_path
+  shell: "nvcc --version | grep '8.0'"
+  register: nvcc_80
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
+    LD_LIBRARY_PATH: "{{cuda_lib}}"
+  ignore_errors: true # do not stop playbook if CUDA not found
 
-- when: not cuda_path.stat.exists
-  debug:
-    msg: "Could not find CUDA. Relion will not be installed with GPU support. Expected path CUDA directory: {{cuda_dir}} If CUDA is installed on your system, please edit the var file to the correct path."
+- when: nvcc_80|failed
+  pause:
+    prompt: "Could not find CUDA at expected path CUDA directory: {{cuda_install_dir}} If CUDA is installed on your system, please exit the playbook with 'ctrl-c' then 'a', and edit the 'cuda_install_dir' variable in the inventory file to the correct path. If you want to continue installing Relion without GPU support, hit 'enter'."
 
 
 - name: Create individual software directories

@@ -1,16 +1,3 @@
-
-# variables for installing Relion
-shared_dir: "/shared/"
-scratch_dir: "/scratch/"
-
-
-
-
-# shared location where all programs are to be installed
-install_dir: "{{shared_dir}}relion/"
-download_dir: "{{shared_dir}}downloads/"
-
-
 # local environment variables
 local_path: "{{ lookup('env', 'PATH') }}"
 local_libpath: "{{ lookup('env', 'LD_LIBRARY_PATH') }}"
@@ -19,23 +6,10 @@ local_libpath: "{{ lookup('env', 'LD_LIBRARY_PATH') }}"
 
 
 
-
-cuda_dl: https://developer.nvidia.com/compute/cuda/8.0/prod/local_installers/cuda_8.0.44_linux-run
-cuda_dl_checksum: 6dca912f9b7e2b7569b0074a41713640
-
-cuda_installer_path: "{{ download_dir }}cuda_installer.run"
-
-# shared directory at which CUDA 8.0 should be installed, or is already installed on your machine
-cuda_install_dir: "{{ shared_dir }}cuda/cuda-8.0/"
-cuda_samples_dir: "{{ cuda_install_dir }}CUDA-8.0_Samples/"
-
-cuda_symlink: "/usr/local/cuda"
-
 cuda_bin: "{{cuda_install_dir}}bin/"
 cuda_lib: "{{cuda_install_dir}}lib64/"
 
 
-cuda_env_script: "/etc/profile.d/cuda.sh"
 
 
 # Cuda 7.5 locations
@@ -49,6 +23,8 @@ cuda_7p5_lib: "{{cuda_7p5_dir}}lib64/"
 # To upgrade any of these programs to a newer release, change the indicated installation directory and/or the expected executable path.
 
 
+install_dir: "{{ shared_dir }}relion/"
+download_dir: "{{ install_dir }}downloads/"
 
 
 
