@@ -1,8 +1,0 @@
-[installer]
-localhost
-
-[drivers]
-localhost
-#node2
-#node3
-#node4

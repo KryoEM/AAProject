@@ -1,0 +1,15 @@
+[installer]
+localhost
+
+[machines]
+node1
+node2
+node3
+node4
+
+
+[all:vars]
+cuda_install_dir="/shared/cuda/cuda-8.0/"
+
+[installer:vars]
+downloads_dir="/shared/cuda/downloads/"
