@@ -39,7 +39,6 @@
     - relion_env
     - imod_env
     - python_env
-    - cuda_env
 
 
 - name: Sanity check
