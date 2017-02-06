@@ -9,7 +9,7 @@ node4
 
 
 [all:vars]
-cuda_install_dir="/shared/cuda/cuda-8.0/"
+cuda_install_dir="/mnt/shared/cuda/cuda-8.0/"
 
 [installer:vars]
-downloads_dir="/shared/cuda/downloads/"
+downloads_dir="/mnt/shared/cuda/downloads/"

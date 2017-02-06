@@ -7,7 +7,7 @@
     url: "{{ cuda_dl }}"
     dest: "{{ cuda_install_dir }}"
     mode: 0755
-    checksum: "{{ cuda_checksum }}"
+    checksum: "{{ cuda_dl_checksum }}"
 
 - debug:
     msg: "CUDA 8.0 is about to be installed. If installation fails, please check output and error logs located at {{ cuda_install_dir }}"

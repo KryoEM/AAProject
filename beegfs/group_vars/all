@@ -10,10 +10,10 @@ beegfs_pkglist_url: http://www.beegfs.com/release/latest-stable/dists/beegfs-deb
 beegfs_pkglist_dest: /etc/apt/sources.list.d # Download the list file to here
 beegfs_key_url: http://www.beegfs.com/release/latest-stable/gpg/DEB-GPG-KEY-beegfs
 
-mgmt_host: node4
+mgmt_host: node1
 
 # Devices for beegfs
-storage_device: sdb
-meta_device: sdc
-scratch_device: sdd
-network_interface: enp129s0f1
+storage_device: xvdb
+meta_device: xvdc
+scratch_device: xvdd
+network_interface: eth0

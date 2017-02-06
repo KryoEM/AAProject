@@ -11,9 +11,7 @@
 # if cuda found
 - debug:
     msg: "CUDA 8.0 found. Skipping installation of CUDA 8.0 Toolkit."
-  when: nvcc_80|succeeded
-
-
+  when: nvcc_80|success
 
 # if cuda not found
 - pause:
@@ -23,6 +21,3 @@
 - name: Install CUDA
   include: cuda.yaml
   when: nvcc_80|failed 
-
-
-
