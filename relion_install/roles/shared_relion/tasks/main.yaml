@@ -75,6 +75,13 @@
   when: relion_dl_python_check.stat.exists
 
 
+- name: Relion - add sample mpirun hosts file
+  template:
+    src: "mpirun_default.hosts.j2"
+    dest: "{{ relion_install_dir }}mpirun_default.hosts"
+
+
+
 
 
 - name: Install auxiliary software if not already installed
