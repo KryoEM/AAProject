@@ -2,10 +2,14 @@
 # Installs CUDA 8.0 Toolkit
 
 ---
+- name: Create directories if they don't exist
+  file: path={{ downloads_dir }} state=directory
+- file: path={{ cuda_install_dir }} state=directory
+
 - name: Download CUDA 8.0 Toolkit
   get_url: 
     url: "{{ cuda_dl }}"
-    dest: "{{ cuda_install_dir }}"
+    dest: "{{ cuda_installer_path }}"
     mode: 0755
     checksum: "{{ cuda_dl_checksum }}"
 
