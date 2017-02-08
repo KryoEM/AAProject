@@ -1,6 +1,9 @@
+
+# Host that will perform installation of shared software
 [installer]
 localhost
 
+# All hosts that will be Relion-enabled
 [machines]
 node1
 node2
@@ -8,9 +11,13 @@ node3
 node4
 
 
+
 [all:vars]
+# Shared directory where bulk of software will be installed
 shared_dir="/shared/"
+
+# Scratch or tmp directory for temporary files
 scratch_dir="/scratch/"
 
-[installer:vars]
-cuda_install_dir="/shared/cuda/cuda-8.0/"
+# If Cuda 8.0 toolkit is already installed on the system, indicate its path with this variable
+#cuda_existing_dir="/shared/cuda/cuda-8.0/"
