@@ -1,0 +1,41 @@
+---
+- name: Add the user and create ssh keys
+  user:
+    name: "{{ user }}"
+    password: "{{ password }}"
+    generate_ssh_key: yes
+    ssh_key_bits: "{{ key_size }}"
+    ssh_key_file: .ssh/id_rsa
+    shell: /bin/bash
+
+- name: Get SSH key of the created user
+  shell: cat /home/{{ user }}/.ssh/id_rsa.pub
+  register: ssh_key
+  
+- name: Deploy key on all nodes
+  authorized_key: user={{ user }} key={{ item[0] }}
+  delegate_to: "{{ item[1] }}"
+  with_nested:
+    - "{{ ssh_key.stdout }}"
+    - "{{ groups['add_user'] }}" 
+
+- name: Get the current username running Ansible
+  local_action: command whoami
+  register: local_user
+  become: no
+
+- name: Get local user's SSH key
+  shell: cat /home/{{ local_user.stdout }}/.ssh/id_rsa.pub
+  register: ssh_key_local
+
+# TODO: Add this loop to the loop above. Not functionally important, but makes the playbook more redable
+- name: Copy the local user's SSH key to other nodes
+  authorized_key: user={{ user }} key={{ item[0] }}
+  delegate_to: "{{ item[1] }}"
+  with_nested:
+    - "{{ ssh_key_local.stdout }}"
+    - "{{ groups['add_user'] }}"
+  
+- name: Copy the new user's SSH key to the current machine running Ansible
+  local_action: authorized_key user={{ local_user.stdout }} key={{ ssh_key.stdout }}
+

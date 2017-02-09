@@ -1,0 +1,15 @@
+---
+- hosts: add_user
+  become: yes
+  vars_prompt:
+    - name: user
+      prompt: "Username"
+      private: no
+    - name: password
+      prompt: "Password"
+      private: yes
+      encrypt: sha512_crypt
+      confirm: yes
+      salt_size: 7
+  roles:
+    - add_user
