@@ -15,5 +15,5 @@
   args:
     chdir: "{{motioncorr_src_dir}}"
   environment:
-    PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
-    LD_LIBRARY_PATH: "{{cuda_lib}}"
+    PATH: "{{ansible_env.PATH}}:{{ local_bin}}"
+    LD_LIBRARY_PATH: "{{ local_lib }}"

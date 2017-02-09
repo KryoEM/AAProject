@@ -9,4 +9,4 @@
       #!/bin/sh
 
 
-      export PATH="{{ conda_bin }}:$PATH"
+      export PATH="{{ anaconda_bin }}:$PATH"

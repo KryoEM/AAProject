@@ -25,8 +25,8 @@
   # options:
   # double precision on/off -DDoublePrec_GPU=ON
   # set computer version of CUDA-capable device (i.e. GPU) -DCUDA_ARCH=61
-  # system-wide install location -DCMAKE_INSTALL_PREFIX={{ relion_install_dir }}
-  shell: cmake -DCUDA_ARCH=61 -DCMAKE_INSTALL_PREFIX={{relion_install_dir}} .. > cmake.out 2> cmake.err
+  # system-wide install location -DCMAKE_INSTALL_PREFIX={{ relion_ver_dir }}
+  shell: cmake -DCUDA_ARCH=61 -DCMAKE_INSTALL_PREFIX={{relion_ver_dir}} .. > cmake.out 2> cmake.err
   args:
     chdir: "{{relion_build_dir }}"
 

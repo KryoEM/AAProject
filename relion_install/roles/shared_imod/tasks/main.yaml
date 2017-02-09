@@ -6,21 +6,26 @@
     path: "{{ imod_install_dir }}"
 
 
-- name: IMOD - download
-  get_url:
-    url: "{{ imod_dl_link }}"
-    dest: "{{ imod_install_dir }}"
-    checksum: "{{ imod_dl_checksum }}"
-
-- name: Check if IMOD installation exists
+- name: Check if IMOD installation already exists
   stat:
     path: "{{imod_install_dir}}IMOD/bin/"
   register: imod_bin_path
 
 
+
+
+- name: IMOD - download
+  get_url:
+    url: "{{ imod_dl_link }}"
+    dest: "{{ download_dir }}{{ imod_installer_name }}"
+    checksum: "{{ imod_dl_checksum }}"
+  when: not imod_bin_path.stat.exists
+
+
+
 - name: IMOD - install
-  shell: "csh -f {{ imod_installer_name }} -dir {{ imod_install_dir}} -skip -yes > install.out 2> install.err"
+  shell: "csh -f {{ imod_installer_name }} -dir {{ imod_install_dir }} -skip -yes > {{ imod_install_dir }}install.out 2> {{ imod_install_dir }}install.err"
   args:
-    chdir: "{{ imod_install_dir }}"
+    chdir: "{{ download_dir }}"
   become: yes
   when: not imod_bin_path.stat.exists

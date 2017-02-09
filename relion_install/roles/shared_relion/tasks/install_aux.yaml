@@ -14,32 +14,20 @@
 
 
 
-- name: Check if Unblur installed
-  find:
-    paths: "{{ unblur_ver_dir }}bin"
-    pattern: "*.exe"
-  register: unblur_find
 
 - name: unblur - download and untar executable
-  when: "{{ int(unblur_find.matched) > 0 }}"
   unarchive:
     src: "{{unblur_dl_link }}"
     dest: "{{unblur_install_dir}}"
     remote_src: yes
 
 
-- name: Check if Summovie installed
-  find:
-    paths: "{{ summovie_ver_dir }}bin"
-    pattern: "*.exe"
-  register: summovie_find
-
 - name: summovie - download and untar executable
-  when: "{{ int(summovie_find.matched) > 0 }}"
   unarchive:
     src: "{{summovie_dl_link }}"
     dest: "{{summovie_install_dir}}"
     remote_src: yes
+
 
 
 
@@ -70,3 +58,4 @@
     dest: "{{ resmap_exe_path }}"
     mode: 0755
     validate_certs: False
+    checksum: "{{ resmap_dl_checksum }}"

@@ -20,4 +20,4 @@ shared_dir="/shared/apps/"
 scratch_dir="/scratch/"
 
 # If Cuda 8.0 toolkit is already installed on the system, indicate its path by changing this variable and un-commenting the line
-#cuda_existing_dir="/shared/cuda/cuda-8.0/"
+cuda_existing_dir="/shared/cuda/cuda-8.0/"

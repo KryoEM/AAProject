@@ -1,5 +1,19 @@
 # Set up environment variables and links for running Relion.
 ---
+
+- name: Find Unblur executable name
+  find:
+    paths: "{{ unblur_ver_dir }}bin"
+    pattern: "*.exe"
+  register: unblur_find_exe
+
+- name: Find Summovie executable name
+  find:
+    paths: "{{ summovie_ver_dir }}bin"
+    pattern: "*.exe"
+  register: summovie_find_exe
+
+
 - name: Setup local Relion environment variables
   blockinfile:
     dest: /etc/profile.d/relion.sh
@@ -22,11 +36,11 @@
       export RELION_PDFVIEWER_EXECUTABLE=evince
 
       # Default MOTIONCORR executable
-      export RELION_MOTIONCORR_EXECUTABLE={{motioncorr_exe_path}}
+      export RELION_MOTIONCORR_EXECUTABLE={{ motioncorr_exe_path }}
 
       # Default UNBLUR/SUMMOVIE executables
-      export RELION_UNBLUR_EXECUTABLE={{unblur_exe_path}}
-      export RELION_SUMMOVIE_EXECUTABLE={{summovie_exe_path}}
+      export RELION_UNBLUR_EXECUTABLE={{ unblur_find_exe.files[0].path }}
+      export RELION_SUMMOVIE_EXECUTABLE={{ summovie_find_exe.files[0].path }}}}
 
       # Default CTFFIND executable, version 4.1
       export RELION_CTFFIND_EXECUTABLE={{ctffind4_exe_path}}
@@ -49,7 +63,7 @@
 
 - name: Check for custom Python scripts
   stat:
-    path: "{{ relion_python }}"
+    path: "{{ relion_python_dir }}"
   register: relion_python_check
 
 
@@ -62,8 +76,8 @@
 
 
       # Set up environment variables for RELION-2.0
-      export PATH=$PATH:{{ relion_python }}
-      export PYTHONPATH=$PYTHONPATH:{{ relion_python }}
+      export PATH=$PATH:{{ relion_python_dir }}
+      export PYTHONPATH=$PYTHONPATH:{{ relion_python_dir }}
   when: relion_python_check.stat.exists
 
 

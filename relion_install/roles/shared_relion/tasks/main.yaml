@@ -1,19 +1,14 @@
-- debug:
-    msg: 'NOTE: All software to be installed is version-specific, and the versions are hard-coded in the variables file (relion_install/group_vars/all). The playbook will not install a program if the version in the playbook is already there. This prevents accidentally overwriting pre-existing versions. In order to upgrade versions, please change the hard-coded version in the variables file, and then run the playbook again. A new installation folder will be created for the new version.'
-
-
-
 - name: Check if CUDA installed 
   shell: "nvcc --version | grep '8.0'"
   register: nvcc_80
   environment:
-    PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
-    LD_LIBRARY_PATH: "{{cuda_lib}}"
+    PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
+    LD_LIBRARY_PATH: "{{ local_lib }}"
   ignore_errors: true # do not stop playbook if CUDA not found
 
 - when: nvcc_80|failed
   pause:
-    prompt: "Could not find CUDA at expected path CUDA directory: {{cuda_install_dir}} If CUDA is installed on your system, please exit the playbook with 'ctrl-c' then 'a', and edit the 'cuda_install_dir' variable in the inventory file to the correct path. If you want to continue installing Relion without GPU support, hit 'enter'."
+    prompt: "WARNING: Could not find CUDA. Please install CUDA before running this playbook. You can exit the playbook with 'ctrl-c' then 'a'. If you want to continue installing Relion without GPU support, hit 'enter'."
 
 
 - name: Create individual software directories
@@ -22,11 +17,10 @@
     path: "{{ item }}"
   with_items:
     - "{{relion_download_dir}}"
-    - "{{relion_install_dir}}"
-    - "{{motioncorr_install_dir}}"
-    - "{{motioncor2_internal_dir}}"
-    - "{{unblur_install_dir}}"
-    - "{{summovie_install_dir}}"
+    - "{{relion_ver_dir}}"
+    - "{{motioncorr_ver_dir}}"
+    - "{{unblur_ver_dir}}"
+    - "{{summovie_ver_dir}}"
     - "{{ctffind4_ver_dir}}"
     - "{{gctf_install_dir}}"
     - "{{resmap_install_dir}}"
@@ -46,16 +40,16 @@
   when: not relion_path.stat.exists
   include: install_relion_base.yaml
   environment:
-    PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
-    LD_LIBRARY_PATH: "{{cuda_lib}}"
+    PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
+    LD_LIBRARY_PATH: "{{ local_lib }}"
 
 - name: "Verify FFTW and FLTK lib exist"
   file:
-    path: "{{relion_install_dir}}lib/"
+    path: "{{relion_ver_dir}}lib/"
     state: directory
 
 - name: Relion - ensure paths to FFTW and FLTK libraries exist
-  shell: "cp -d -n {{relion_download_dir}}external/*/lib/lib* {{relion_install_dir}}lib/"
+  shell: "cp -d -n {{relion_download_dir}}external/*/lib/lib* {{relion_ver_dir}}lib/"
   # -d to preserve links
   # -n no-clobber, will not overwrite existing files
 
@@ -78,7 +72,7 @@
 - name: Relion - add sample mpirun hosts file
   template:
     src: "mpirun_default.hosts.j2"
-    dest: "{{ relion_install_dir }}mpirun_default.hosts"
+    dest: "{{ relion_ver_dir }}mpirun_default.hosts"
 
 
 
