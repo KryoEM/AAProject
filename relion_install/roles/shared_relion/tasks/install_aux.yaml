@@ -13,50 +13,46 @@
   include: install_motioncorr.yaml
 
 
-- name: MotionCor2 (by Shawn Zheng at UCSF) - download and untar executable
-  unarchive:
-    src: "{{motioncor2_dl_link}}"
-    dest: "{{motioncor2_internal_dir}}"
-    remote_src: yes
-    creates: "{{motioncor2_exe_path}}"
 
-- name: MotionCor2 - create wrapper script
-  blockinfile:
-    dest: "{{motioncor2_wrapper}}"
-    create: yes
-    block: |
-      #!/bin/sh
-
-      # Wrapper script for MotionCor2 that sets up proper environment.
-      # Set up CUDA 7.5 environment
-      export PATH={{cuda_7p5_bin}}:$PATH
-      export LD_LIBRARY_PATH={{cuda_7p5_lib}}:$LD_LIBRARY_PATH
-
-      # Run MotionCor2, passing all arguments
-      {{motioncor2_exe_path}} "$@"
-    mode: a+x
+- name: Check if Unblur installed
+  find:
+    paths: "{{ unblur_ver_dir }}bin"
+    pattern: "*.exe"
+  register: unblur_find
 
 - name: unblur - download and untar executable
+  when: "{{ int(unblur_find.matched) > 0 }}"
   unarchive:
     src: "{{unblur_dl_link }}"
     dest: "{{unblur_install_dir}}"
     remote_src: yes
-    creates: "{{unblur_exe_path}}"
+
+
+- name: Check if Summovie installed
+  find:
+    paths: "{{ summovie_ver_dir }}bin"
+    pattern: "*.exe"
+  register: summovie_find
 
 - name: summovie - download and untar executable
+  when: "{{ int(summovie_find.matched) > 0 }}"
   unarchive:
     src: "{{summovie_dl_link }}"
     dest: "{{summovie_install_dir}}"
     remote_src: yes
-    creates: "{{summovie_exe_path}}"
+
+
 
 
 - name: CTFFIND4 - download and untar executable
   unarchive:
-    src: "{{ctffind4_dl_link }}"
-    dest: "{{ctffind4_install_dir}}"
+    src: "{{ ctffind4_dl_link }}"
+    dest: "{{ ctffind4_ver_dir }}"
     remote_src: yes
     creates: "{{ctffind4_exe_path}}"
+
+
+
 
 
 - name: GCTF - download and untar executables
@@ -64,12 +60,13 @@
     src: "{{gctf_dl_link }}"
     dest: "{{gctf_install_dir}}"
     remote_src: yes
-    creates: "{{gctf_exe_path}}"
+
+
 
 
 - name: RESMAP - download executable
   get_url:
-    url: "{{resmap_dl_link }}"
-    dest: "{{resmap_exe_path}}"
+    url: "{{ resmap_dl_link }}"
+    dest: "{{ resmap_exe_path }}"
     mode: 0755
     validate_certs: False

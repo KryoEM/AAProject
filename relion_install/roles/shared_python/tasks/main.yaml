@@ -5,11 +5,7 @@
 - name: Set up Python directory
   file:
     state: directory
-    path: "{{ item }}"
-  with_items:
-  - "{{ python_dir }}"
-  - "{{ python_dl_dir }}"
-
+    path: "{{ python_dir }}"
 
 - name: Display message
   debug:
@@ -18,22 +14,22 @@
 
 - name: Check if Anaconda installation exists
   stat:
-    path: "{{conda_install_dir}}bin/"
-  register: conda_bin_path
+    path: "{{ anaconda_bin }}"
+  register: anaconda_bin_path
 
 - name: Download Anaconda for Python 2.7 installer
   get_url:
-    url: "{{ conda_dl_link }}"
-    dest: "{{ python_dl_dir }}"
-    checksum: "{{ conda_dl_checksum }}"
-  when: not conda_bin_path.stat.exists
+    url: "{{ anaconda_dl_link }}"
+    dest: "{{ download_dir }}"
+    checksum: "{{ anaconda_dl_checksum }}"
+  when: not anaconda_bin_path.stat.exists
 
-# run Anaconda installer in batch mode (no manual input), and install at {{ python_dir }}
+# run Anaconda installer in batch mode (no manual input)
 - name: Run Anaconda installer
-  shell: "bash {{ conda_installer }} -b -p {{ conda_install_dir }} > anaconda_install.out 2> anaconda_install.err"
+  shell: "bash {{ anaconda_installer }} -b -p {{ anaconda_install_dir }} > anaconda_install.out 2> anaconda_install.err"
   args:
-    chdir: "{{ python_dl_dir }}"
-  when: not conda_bin_path.stat.exists
+    chdir: "{{ download_dir }}"
+  when: not anaconda_bin_path.stat.exists
 
 
 # requires pip to have been installed by Anaconda 
@@ -45,4 +41,4 @@
     - mpi4py
     - simplejson
   environment:
-    PATH: "{{ ansible_env.PATH }}:{{ conda_bin }}"
+    PATH: "{{ ansible_env.PATH }}:{{ anaconda_bin }}"

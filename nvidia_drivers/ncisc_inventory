@@ -1,0 +1,19 @@
+# host that will perform installation of shared Cuda toolkit
+[installer]
+localhost
+
+# all hosts that will have nvidia drivers installed and have access to the shared Cuda toolkit
+[machines]
+node1
+node2
+node3
+node4
+
+
+# location where Cuda should be installed
+[all:vars]
+cuda_install_dir="/mnt/shared/apps/cuda/cuda-8.0/"
+
+# location where downloaded installer files should be kept.
+[installer:vars]
+downloads_dir="/mnt/shared/apps/downloads/"

@@ -27,7 +27,7 @@
     - "{{motioncor2_internal_dir}}"
     - "{{unblur_install_dir}}"
     - "{{summovie_install_dir}}"
-    - "{{ctffind4_install_dir}}"
+    - "{{ctffind4_ver_dir}}"
     - "{{gctf_install_dir}}"
     - "{{resmap_install_dir}}"
 
@@ -69,7 +69,7 @@
 - name: Relion - copy custom Python scripts to installation directory
   synchronize:
     src: "{{ relion_download_dir }}python/"
-    dest: "{{ relion_python }}"
+    dest: "{{ relion_python_dir }}"
     recursive: yes
     delete: yes
   when: relion_dl_python_check.stat.exists
