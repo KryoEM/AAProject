@@ -6,6 +6,8 @@
   apt:
     name: "{{ item }}"
     state: latest
+    update_cache: yes
+    cache_valid_time: 3600
   with_items:
     - build-essential # required for C++ compiler & auxillary packages to use in building Relion
     - tar # required for Ansible unarchie module

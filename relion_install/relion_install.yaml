@@ -3,7 +3,6 @@
   hosts: machines
   become: yes
   roles:
-    - updated_apt_cache
     - openmpi
     - run_depends
 

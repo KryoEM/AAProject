@@ -32,9 +32,12 @@
     path: "{{relion_exe_path}}"
   register: relion_path
 
-- when: relion_path.stat.exists
+- name: Display message
+  when: relion_path.stat.exists
   debug:
-    msg: "Relion 2.0 is already installed, with an executable at {{relion_exe_path}} If you want to re-do the installation, please delete the existing installation folder. If you want to upgrade Relion 2.0 to a newer release, please change the release number in the var file."
+    msg: "Relion 2.0 is already installed, with an executable at {{relion_exe_path}} If you want to re-do the installation, please delete the existing installation folder. If you are a developer and want to upgrade Relion 2.0 to a newer release, please change the version number in the variables file."
+
+
 
 - name: Install Relion 2.0
   when: not relion_path.stat.exists
@@ -42,6 +45,8 @@
   environment:
     PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
     LD_LIBRARY_PATH: "{{ local_lib }}"
+
+
 
 - name: "Verify FFTW and FLTK lib exist"
   file:

@@ -1,5 +1,12 @@
 # Set up environment variables and links for running Relion.
 ---
+- name: Find Cuda path
+  shell: echo `which nvcc`
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
+    LD_LIBRARY_PATH: "{{ local_lib }}"
+  register: nvcc_path
+
 
 - name: Find Unblur executable name
   find:
@@ -23,12 +30,12 @@
 
 
       # Set up environment variables for RELION-2.0
-      export PATH=$PATH:{{relion_bin}}
-      export LD_LIBRARY_PATH={{relion_lib}}:$LD_LIBRARY_PATH
+      export PATH=$PATH:{{ relion_bin }}
+      export LD_LIBRARY_PATH=LD_LIBRARY_PATH:{{ relion_lib }}
 
 
       # Set up Relion-specific environment variable for CUDA
-      export CUDA_HOME=/usr/local/cuda
+      export CUDA_HOME={{ nvcc_path|replace("/nvcc","") }}
 
 
 
@@ -74,18 +81,7 @@
     block: |
       #!/bin/sh
 
-
       # Set up environment variables for RELION-2.0
       export PATH=$PATH:{{ relion_python_dir }}
       export PYTHONPATH=$PYTHONPATH:{{ relion_python_dir }}
   when: relion_python_check.stat.exists
-
-
-
-- name: Link libtiff library for MotionCor2
-  file:
-    state: link
-    path: /usr/lib/libtiff.so.3
-    src:  /usr/lib/x86_64-linux-gnu/libtiff.so.5
-    follow: yes
-  become: yes

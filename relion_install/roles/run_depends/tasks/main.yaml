@@ -5,6 +5,8 @@
   apt:
     name: "{{item}}"
     state: latest
+    update_cache: yes
+    cache_valid_time: 3600    
   with_items:
     - evince      # for viewing PDFs from the GUI
     - pdftk       # for running ctffind_plot_results.sh
