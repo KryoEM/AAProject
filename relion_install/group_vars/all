@@ -2,14 +2,8 @@
 local_path: "{{ lookup('env', 'PATH') }}"
 local_libpath: "{{ lookup('env', 'LD_LIBRARY_PATH') }}"
 
-
-
-
 install_dir: "{{ shared_dir }}apps/relion/"
 download_dir: "{{ install_dir }}downloads/"
-
-
-
 
 
 # ================= CUDA VARIABLES =====================
@@ -17,11 +11,8 @@ download_dir: "{{ install_dir }}downloads/"
 # Cuda should be located either at the user-defined directory, or the default location in the shared directory
 cuda_install_dir: "{{ cuda_existing_dir | default( {{ shared_dir }}cuda/cuda-8.0/ ) }}"
 
-
 cuda_bin: "{{cuda_install_dir}}bin/"
 cuda_lib: "{{cuda_install_dir}}lib64/"
-
-
 
 
 # ================= RELION VARIABLES =====================
@@ -35,25 +26,18 @@ cuda_lib: "{{cuda_install_dir}}lib64/"
 # custom repository
 relion_repo: "https://github.com/KryoEM/relion2.git"
 relion_repo_ver: 'master'
-relion_ver="relion2.0.2_custom"
-
-
+relion_ver: "relion2.0.2_custom"
 
 relion_install_dir: "{{ install_dir }}Relion2.0/{{ relion_ver }}/"
-
-
 relion_download_dir: "{{download_dir}}relion2-beta/"
 relion_build_dir: "{{relion_download_dir}}build/"
+
 relion_bin: "{{relion_install_dir}}bin/"
 relion_lib: "{{relion_install_dir}}lib/"
+
 relion_exe_path: "{{relion_install_dir}}bin/relion"
-
 relion_python: "{{relion_install_dir}}python/"
-
-
 relion_env_script: "/etc/profile.d/relion.sh"
-
-
 
 
 # =============== MOTIONCORR VARIABLES ====================
@@ -63,11 +47,6 @@ motioncorr_install_dir: "{{install_dir}}MotionCorr/"
 motioncorr_version_dir: "{{motioncorr_install_dir}}motioncorr_v2.1/"
 motioncorr_src_dir: "{{motioncorr_version_dir}}src/"
 motioncorr_exe_path: "{{motioncorr_install_dir}}motioncorr_v2.1/bin/dosefgpu_driftcorr"
-
-
-
-
-
 
 
 # ===================== UNBLUR / SUMMOVIE VARIABLES ==========================
@@ -81,13 +60,7 @@ summovie_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/summovie
 summovie_install_dir: "{{install_dir}}Summovie/"
 summovie_exe_path: "{{summovie_install_dir}}summovie_1.0.2/bin/sum_movie_openmp_7_17_15.exe"
 
-
-
-
-
-
 # ===================== CTFFIND VARIABLES ==========================
-
 
 # links and paths for installion of Ctffind
 ctffind_install_dir: "{{install_dir}}CtfFind/"
@@ -97,10 +70,7 @@ ctffind4_install_dir: "{{ctffind_install_dir}}ctffind4.1.5/"
 ctffind4_exe_path: "{{ctffind4_install_dir}}bin/ctffind"
 
 
-
-
 # ===================== GCTF VARIABLES ==========================
-
 
 # links and paths for installion of Gctf
 gctf_dl_link: "http://www.mrc-lmb.cam.ac.uk/kzhang/Gctf/Gctf_v1.06_and_examples.tar.gz"
@@ -108,13 +78,7 @@ gctf_install_dir: "{{install_dir}}Gctf/"
 gctf_exe_path: "{{gctf_install_dir}}Gctf_v1.06/bin/Gctf-v1.06_sm_30_cu8.0_x86_64"
 
 
-
-
-
-
 # ===================== RESMAP VARIABLES ==========================
-
-
 
 # links and paths for installion of ResMap
 resmap_dl_link: "http://downloads.sourceforge.net/project/resmap/ResMap-1.1.4-linux64?r=&ts=1480697023"
@@ -122,14 +86,7 @@ resmap_install_dir: "{{install_dir}}ResMap/"
 resmap_exe_path: "{{resmap_install_dir}}ResMap-1.1.4-linux64"
 
 
-
-
-
-
-
-
 # ===================== IMOD VARIABLES ==========================
-
 
 # links and paths for installation of IMOD
 imod_dl_link: "http://bio3d.colorado.edu/imod/AMD64-RHEL5/imod_4.7.15_RHEL6-64_CUDA6.0.csh"
@@ -138,19 +95,11 @@ imod_install_dir: "{{shared_dir}}/imod/"
 imod_installer_name: "imod_4.7.15_RHEL6-64_CUDA6.0.csh"
 
 
-
-
-
-
-
 # ===================== PYTHON VARIABLES ==========================
-
 
 # links and paths for installation of Python-related software
 python_dir: "{{shared_dir}}/python/"
-python_dl_dir: "{{ python_dir }}download/"
-
-
+python_dl_dir: "{{ python_dir }}download"
 
 #links and paths for installation of Anaconda
 conda_dl_link: "https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh"
@@ -160,18 +109,6 @@ conda_installer: "Anaconda2-4.2.0-Linux-x86_64.sh"
 conda_install_dir: "{{ python_dir }}Anaconda2-4.2.0/"
 conda_bin: "{{ conda_install_dir }}bin"
 
-
-
-
-
-
-
-
-
-
-
-
-
 # links and paths for installation of MotionCor2
 #motioncor2_dl_link: "http://msg.ucsf.edu/MotionCor2/MotionCor2-10-19-2016.tar.gz"
 #motioncor2_install_dir: "{{install_dir}}MotionCor2/"
@@ -180,9 +117,7 @@ conda_bin: "{{ conda_install_dir }}bin"
 
 #motioncor2_wrapper: "{{motioncor2_install_dir}}MotionCor2_env"
 
-
 # Cuda 7.5 locations
 #cuda_7p5_dir: "{{shared_dir}}/cuda/cuda-7.5/"
 #cuda_7p5_bin: "{{cuda_7p5_dir}}bin/"
 #cuda_7p5_lib: "{{cuda_7p5_dir}}lib64/"
-
