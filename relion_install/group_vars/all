@@ -27,7 +27,7 @@ relion_bin: "{{relion_ver_dir}}bin"
 relion_lib: "{{relion_ver_dir}}lib"
 relion_exe_path: "{{relion_ver_dir}}bin/relion"
 
-relion_python_dir: "{{relion_ver_dir}}python/"
+relion_python_dir: "{{relion_ver_dir}}python"
 
 
 relion_env_script: "/etc/profile.d/relion.sh"
@@ -148,4 +148,4 @@ python_dir: "{{shared_dir}}python/"
 
 anaconda_installer: "{{ anaconda_ver }}.sh"
 anaconda_install_dir: "{{ python_dir }}{{ anaconda_ver }}/"
-anaconda_bin: "{{ anaconda_install_dir }}bin/"
+anaconda_bin: "{{ anaconda_install_dir }}bin"
