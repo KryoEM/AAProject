@@ -1,8 +1,6 @@
 - debug:
     msg: 'NOTE: All software to be installed is version-specific, and the versions are hard-coded in the variables file (relion_install/group_vars/all). The playbook will not install a program if the version in the playbook is already there. This prevents accidentally overwriting pre-existing versions. In order to upgrade versions, please change the hard-coded version in the variables file, and then run the playbook again. A new installation folder will be created for the new version.'
 
-
-
 - name: Check if CUDA installed 
   shell: "nvcc --version | grep '8.0'"
   register: nvcc_80
@@ -11,10 +9,9 @@
     LD_LIBRARY_PATH: "{{cuda_lib}}"
   ignore_errors: true # do not stop playbook if CUDA not found
 
-- when: nvcc_80|failed
-  pause:
-    prompt: "Could not find CUDA at expected path CUDA directory: {{cuda_install_dir}} If CUDA is installed on your system, please exit the playbook with 'ctrl-c' then 'a', and edit the 'cuda_install_dir' variable in the inventory file to the correct path. If you want to continue installing Relion without GPU support, hit 'enter'."
-
+- pause:
+    prompt: "Could not find CUDA at expected path CUDA directory {{cuda_install_dir}} If CUDA is installed on your system, please exit the playbook with 'ctrl-c' then 'a', and edit the 'cuda_install_dir' variable in the inventory file to the correct path. If you want to continue installing Relion without GPU support, hit 'enter'."
+  when: nvcc_80|failed
 
 - name: Create individual software directories
   file:
