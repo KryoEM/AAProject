@@ -1,7 +1,5 @@
 # Install Python-related modules, such as Anaconda and mpi4py
-
 ---
-
 - name: Set up Python directory
   file:
     state: directory
@@ -10,12 +8,13 @@
     - "{{ python_dir }}"
     - "{{ download_dir }}"
 
-
 - name: Check if Anaconda installation exists
   stat:
     path: "{{ anaconda_bin }}"
   register: anaconda_bin_path
 
+- name: Create download directory if it doesn't exist
+  file: path={{ download_dir }} state=directory
 
 
 - name: Display message
@@ -38,6 +37,14 @@
     chdir: "{{ download_dir }}"
   when: not anaconda_bin_path.stat.exists
 
+# TESTING: See if pip updates if updated via apt
+- name: Try to update pip
+  apt: name={{ item }} state=latest update_cache=yes
+  with_items:
+    - python-pip
+    - python-dev
+    - build-essential
+  become: yes
 
 # requires pip to have been installed by Anaconda 
 - name: Install Python packages mpi4py and simplejson
@@ -49,3 +56,7 @@
     - simplejson
   environment:
     PATH: "{{ ansible_env.PATH }}:{{ anaconda_bin }}"
+  ignore_errors: yes
+# the ignore_errors is necessary because sometimes the pip module successfully
+# installs but reports failed to ansible because the pip version is not the latest.
+# I believe this is a bug with ansible, so I've included this temporary workaround

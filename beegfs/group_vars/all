@@ -5,6 +5,9 @@ storage_dir: /mnt/beegfs_storage
 scratch_dir: /mnt/scratch
 mount_point: /mnt/shared
 
+scratch_dir_link: /scratch
+mount_point_link: /shared
+
 # URLs for BeeGFS repo keys
 beegfs_pkglist_url: http://www.beegfs.com/release/latest-stable/dists/beegfs-deb8.list
 beegfs_pkglist_dest: /etc/apt/sources.list.d # Download the list file to here

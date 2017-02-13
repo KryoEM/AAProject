@@ -2,7 +2,11 @@
   apt: name=beegfs-client state=present
   
 - name: Configure the client and create mount point
-  file: path={{ mount_point }} state=directory
+  file: path={{ mount_point }} state=directory mode=1777 owner=root
+
+- name: Symlink the shared directory to root directory
+  file: src={{ mount_point }} dest={{ mount_point_link }} state=link mode=1777 owner=root
+
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^sysMgmtdHost' line='sysMgmtdHost = {{ mgmt_host }}'
 - copy: dest=/etc/beegfs/beegfs-mounts.conf content='{{ mount_point }} /etc/beegfs/beegfs-client.conf'
 - lineinfile: dest=/etc/beegfs/beegfs-client.conf regexp='^connInterfacesFile' line='connInterfacesFile = /etc/beegfs/interface'
@@ -15,7 +19,11 @@
     opts: -i 2048 -I 1024 -J size=400 -Odir_index,filetype -L scratch
 
 - name: Mount the scratch drive
-  file: path={{ scratch_dir }} state=directory
+  file: path={{ scratch_dir }} state=directory mode=1777 owner=root
+  
+- name: Symlink the scratch directory to root directory
+  file: src={{ scratch_dir }} dest={{ scratch_dir_link }} state=link mode=1777 owner=root
+    
 - mount:
     src: /dev/{{ scratch_device }}
     name: "{{ scratch_dir }}"

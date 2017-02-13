@@ -4,19 +4,14 @@ local_lib: "{{ lookup('env', 'LD_LIBRARY_PATH') }}"
 
 
 
+install_dir: "{{ shared_dir }}apps/relion/"
 download_dir: "{{ shared_dir }}downloads/"
 
 
 
 # ================= RELION VARIABLES =====================
 
-# repository to use to install Relion; select only one
-
-# official repository
-#relion_repo: "https://bitbucket.org/tcblab/relion2-beta.git"
-#relion_repo_ver: 'HEAD'
-
-# custom repository
+# repository to use to install Relion
 relion_repo: "https://github.com/KryoEM/relion2.git"
 relion_repo_ver: 'master'
 relion_ver: "relion2.0.2_custom"
@@ -38,8 +33,6 @@ relion_python_dir: "{{relion_ver_dir}}python/"
 relion_env_script: "/etc/profile.d/relion.sh"
 
 
-
-
 # =============== MOTIONCORR VARIABLES ====================
 
 motioncorr_dl_link: "http://cryoem.ucsf.edu/software/motioncorr_v2.1.tar"
@@ -50,11 +43,6 @@ motioncorr_install_dir: "{{shared_dir}}MotionCorr/"
 motioncorr_ver_dir: "{{ motioncorr_install_dir }}{{ motioncorr_ver }}/"
 motioncorr_src_dir: "{{ motioncorr_ver_dir }}src/"
 motioncorr_exe_path: "{{ motioncorr_ver_dir }}bin/dosefgpu_driftcorr"
-
-
-
-
-
 
 
 # ===================== UNBLUR / SUMMOVIE VARIABLES ==========================
@@ -80,7 +68,6 @@ summovie_ver_dir: "{{ summovie_install_dir }}{{ summovie_ver }}/"
 
 # ===================== CTFFIND VARIABLES ==========================
 
-
 # links and paths for installion of Ctffind
 ctffind4_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/ctffind-4.1.5-linux64.tar.gz"
 ctffind4_ver: "ctffind_4.1.5"
@@ -95,7 +82,7 @@ ctffind4_exe_path: "{{ ctffind4_ver_dir }}bin/ctffind"
 
 # ===================== GCTF VARIABLES ==========================
 
-# links and paths for installion of Gctf
+# Installion of Gctf
 gctf_dl_link: "http://www.mrc-lmb.cam.ac.uk/kzhang/Gctf/Gctf_v1.06_and_examples.tar.gz"
 
 # defacult gctf executable to use
@@ -104,7 +91,6 @@ gctf_exe: "Gctf-v1.06_sm_30_cu8.0_x86_64"
 
 gctf_install_dir: "{{shared_dir}}Gctf/"
 gctf_exe_path: "{{ gctf_install_dir }}bin/{{ gctf_exe }}"
-
 
 
 # ===================== RESMAP VARIABLES ==========================
@@ -134,11 +120,9 @@ imod_dl_link: "http://bio3d.colorado.edu/imod/AMD64-RHEL5/imod_4.7.15_RHEL6-64_C
 # checksum for IMOD installer
 imod_dl_checksum: "sha256:b938416944a5860f6930a399ea044d4ef0241280fe46c55240ba3901d5e1a01e"
 
+
 # version name for this IMOD version
 imod_ver: "imod_4.7.15_RHEL6-64_CUDA6.0"
-
-
-
 
 
 imod_installer_name: "{{ imod_ver }}.csh"
@@ -165,5 +149,3 @@ python_dir: "{{shared_dir}}python/"
 anaconda_installer: "{{ anaconda_ver }}.sh"
 anaconda_install_dir: "{{ python_dir }}{{ anaconda_ver }}/"
 anaconda_bin: "{{ anaconda_install_dir }}bin/"
-
-
