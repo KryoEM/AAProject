@@ -35,7 +35,7 @@ relion_env_script: "/etc/profile.d/relion.sh"
 
 # =============== MOTIONCORR VARIABLES ====================
 
-motioncorr_dl_link: "http://cryoem.ucsf.edu/software/motioncorr_v2.1.tar"
+motioncorr_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/motioncorr_v2.1.tar"
 motioncorr_ver: "motioncorr_v2.1"
 
 
@@ -48,10 +48,10 @@ motioncorr_exe_path: "{{ motioncorr_ver_dir }}bin/dosefgpu_driftcorr"
 # ===================== UNBLUR / SUMMOVIE VARIABLES ==========================
 
 # links and paths for installion of Unblur and Summovie
-unblur_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/unblur_1.0.2.tar.gz"
+unblur_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/unblur_1.0.2.tar.gz"
 unblur_ver: "unblur_1.0.2"
 
-summovie_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/summovie_1.0.2.tar.gz"
+summovie_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/summovie_1.0.2.tar.gz"
 summovie_ver: "summovie_1.0.2"
 
 
@@ -69,7 +69,7 @@ summovie_ver_dir: "{{ summovie_install_dir }}{{ summovie_ver }}/"
 # ===================== CTFFIND VARIABLES ==========================
 
 # links and paths for installion of Ctffind
-ctffind4_dl_link: "http://grigoriefflab.janelia.org/sites/default/files/ctffind-4.1.5-linux64.tar.gz"
+ctffind4_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/ctffind-4.1.5-linux64.tar.gz"
 ctffind4_ver: "ctffind_4.1.5"
 
 
@@ -83,7 +83,7 @@ ctffind4_exe_path: "{{ ctffind4_ver_dir }}bin/ctffind"
 # ===================== GCTF VARIABLES ==========================
 
 # Installion of Gctf
-gctf_dl_link: "http://www.mrc-lmb.cam.ac.uk/kzhang/Gctf/Gctf_v1.06_and_examples.tar.gz"
+gctf_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/Gctf_v1.06_and_examples.tar.gz"
 
 # defacult gctf executable to use
 gctf_exe: "Gctf-v1.06_sm_30_cu8.0_x86_64"
@@ -96,26 +96,20 @@ gctf_exe_path: "{{ gctf_install_dir }}bin/{{ gctf_exe }}"
 # ===================== RESMAP VARIABLES ==========================
 
 # links and paths for installion of ResMap
-resmap_dl_link: "http://downloads.sourceforge.net/project/resmap/ResMap-1.1.4-linux64?r=&ts=1480697023"
+resmap_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/ResMap-1.1.4-linux64"
 resmap_dl_checksum: "sha256:e85c8c535acc284def560d78aaf67dac4a16a1c4c7b46b341e99a3fbe761bd18"
 resmap_ver: "ResMap-1.1.4-linux64"
-
-
 
 
 resmap_install_dir: "{{shared_dir}}ResMap/"
 resmap_exe_path: "{{resmap_install_dir}}{{resmap_ver}}"
 
 
-
-
-
-
 # ===================== IMOD VARIABLES ==========================
 
 
 # download link to IMOD installer
-imod_dl_link: "http://bio3d.colorado.edu/imod/AMD64-RHEL5/imod_4.7.15_RHEL6-64_CUDA6.0.csh"
+imod_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/imod_4.7.15_RHEL6-64_CUDA6.0.csh"
 
 # checksum for IMOD installer
 imod_dl_checksum: "sha256:b938416944a5860f6930a399ea044d4ef0241280fe46c55240ba3901d5e1a01e"
@@ -134,7 +128,7 @@ imod_install_dir: "{{shared_dir}}IMOD/"
 # ===================== PYTHON VARIABLES ==========================
 
 # download link to Anaconda installer
-anaconda_dl_link: "https://repo.continuum.io/archive/Anaconda2-4.2.0-Linux-x86_64.sh"
+anaconda_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/Anaconda2-4.2.0-Linux-x86_64.sh"
 
 # checksum for Anaconda installer
 anaconda_dl_checksum: "sha256:beee286d24fb37dd6555281bba39b3deb5804baec509a9dc5c69185098cf661a"
