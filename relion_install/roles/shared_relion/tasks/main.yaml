@@ -9,7 +9,7 @@
 
 - when: nvcc_80|failed
   pause:
-    prompt: "WARNING: Could not find CUDA. Please install CUDA before running this playbook. You can exit the playbook with 'ctrl-c' then 'a'. If you want to continue installing Relion without GPU support, hit 'enter'."
+    prompt: "WARNING: Could not find CUDA. If you want GPU support, you must install CUDA first, for example by running the 'nvidia_drivers' playbook. You can now exit this playbook with 'ctrl-c' then 'a'. If you want to continue installing Relion without GPU support, hit 'enter'."
 
 - name: Create individual software directories
   file:

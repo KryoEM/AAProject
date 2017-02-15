@@ -4,4 +4,5 @@
   template:
     src: imod-linux.sh.j2
     dest: "{{ profile_dir }}imod-linux.sh"
+  become: yes
     

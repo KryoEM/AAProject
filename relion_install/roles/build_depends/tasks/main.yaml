@@ -14,7 +14,7 @@
     - unzip # useful for Ansible unarchive module
     - make # required for building Relion
     - cmake # required for configuring Relion
-
+  become: yes
 
 
 

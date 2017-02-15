@@ -1,14 +1,12 @@
 ---
 - name: Install OpenMPI and run dependencies on all machines
   hosts: machines
-  become: yes
   roles:
     - openmpi
     - run_depends
 
 - name: Install dependencies for building and installation of other software
   hosts: installer
-  become: yes
   roles:
     - build_depends
 
@@ -33,7 +31,6 @@
 # set up the environment variables for all machines
 - name: Set up the environment variables for all machines
   hosts: machines
-  become: yes
   roles:
     - relion_env
     - imod_env
