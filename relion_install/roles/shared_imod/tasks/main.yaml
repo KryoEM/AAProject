@@ -23,6 +23,8 @@
 
 
 
+# install IMOD in {{ imod_install_dir }} and skip installation of startup scripts
+# startup scripts will be installed as a separate role across all machines and not just this installer 
 - name: IMOD - install
   shell: "csh -f {{ imod_installer_name }} -dir {{ imod_install_dir }} -skip -yes > {{ imod_install_dir }}install.out 2> {{ imod_install_dir }}install.err"
   args:

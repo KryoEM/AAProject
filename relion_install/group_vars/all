@@ -8,6 +8,8 @@ install_dir: "{{ shared_dir }}apps/relion/"
 download_dir: "{{ shared_dir }}downloads/"
 
 
+profile_dir: "{{ profile_dir }}"
+
 
 # ================= RELION VARIABLES =====================
 
@@ -30,7 +32,7 @@ relion_exe_path: "{{relion_ver_dir}}bin/relion"
 relion_python_dir: "{{relion_ver_dir}}python"
 
 
-relion_env_script: "/etc/profile.d/relion.sh"
+relion_env_script: "{{ profile_dir }}relion.sh"
 
 
 # =============== MOTIONCORR VARIABLES ====================

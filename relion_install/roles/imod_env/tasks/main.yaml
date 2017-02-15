@@ -1,7 +1,8 @@
 # Set up environment variables and links for running IMOD.
 ---
 - name: Setup local IMOD environment variables
-  copy:
-    dest: /etc/profile.d/IMOD-linux.sh
-    src: "{{ imod_install_dir }}IMOD/IMOD-linux.sh"
-    follow: yes
+  template:
+    src: imod-linux.sh.j2
+    dest: "{{ profile_dir }}imod-linux.sh"
+  become: yes
+    

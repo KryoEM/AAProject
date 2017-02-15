@@ -9,13 +9,7 @@
   become: yes
 
 - name: Set up local profile to include CUDA environment variables 
-  blockinfile:
-    dest: "{{ cuda_env_script }}"
-    create: yes
-    block: |
-      #!/bin/sh
-
-      export PATH=$PATH:/usr/local/cuda/bin
-      export CUDADIR=/usr/local/cuda
-      export CUDADIR=/usr/local/cuda
+  template:
+    src: "cuda.sh.j2"
+    dest: "{{ profile_dir }}cuda.sh"
   become: yes
