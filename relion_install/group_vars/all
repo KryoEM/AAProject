@@ -8,7 +8,7 @@ install_dir: "{{ shared_dir }}apps/relion/"
 download_dir: "{{ shared_dir }}downloads/"
 
 
-profile_dir: "{{ profile_dir }}"
+profile_dir: "/etc/profile.d/"
 
 
 # ================= RELION VARIABLES =====================
