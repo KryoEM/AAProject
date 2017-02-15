@@ -10,7 +10,7 @@ The inventory should list:
 - [machines] hosts that will become Relion-enabled
 - shared_dir directory where you want all applications to be installed
 - scratch_dir directory where temporary files will be written to during installation and for intermediate files during a sanity check
-- cuda_existing_dir directory of a previously installed Cuda 8.0 toolkit (do not list if you want Cuda to be installed)
+
 
 Please see the sample inventory in this folder for guidance.
 

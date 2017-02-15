@@ -3,7 +3,7 @@
 
 - set_fact:
     scratch: "{{scratch_dir}}relion_install_sane/"
-    test_dir: "{{shared_dir}}relion/sanity_test/"
+    test_dir: "{{relion_install_dir }}sanity_test/"
 
 - set_fact:
     cl3d_dir: "{{ test_dir }}Class3D/"
