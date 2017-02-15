@@ -22,9 +22,6 @@
 - set_fact:
     HOST_COUNT: "{{ groups['machines'] | length }}"
 
-
-
-
 - debug:
     msg: "To ensure that everything is working with the installation of Relion, a sanity check will be performed by running two iterations of 3D classification across all machines."
 
@@ -49,9 +46,14 @@
 
 
 - name: Sanity check - download testing data set (~150MB)
-  git:
-    repo: https://github.com/KryoEM/unittest_tiny.git
-    dest: "{{ data_dir }}"
+  get_url:
+    url: https://s3.amazonaws.com/kryoem/AAProject/unittest_tiny.tar.gz
+    dest: "{{ data_dir }}unittest_tiny.tar.gz"
+#  git:
+#    repo: https://github.com/KryoEM/unittest_tiny.git
+#    dest: "{{ data_dir }}"
+
+
 
 - name: Sanity check - untar testing data set
   unarchive:
