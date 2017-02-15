@@ -1,5 +1,5 @@
 #!/bin/sh
 
 # Set up environment variables for custom RELION 2.0 scripts if they do not already exist
-[[ ":$PATH:" != *":{{ relion_python_bin }}:"* ]] && export PATH="${PATH}:{{ relion_python_bin }}"
-[[ ":$PYTHONPATH:" != *":{{ relion_python_bin }}:"* ]] && export PYTHONPATH="${PYTHONPATH}:{{ relion_python_bin }}"
+[[ ":$PATH:" != *":{{ relion_python_bin }}:"* ]] && export PATH="${PATH}:{{ relion_python_dir }}"
+[[ ":$PYTHONPATH:" != *":{{ relion_python_bin }}:"* ]] && export PYTHONPATH="${PYTHONPATH}:{{ relion_python_dir }}"
