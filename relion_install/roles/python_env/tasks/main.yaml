@@ -2,11 +2,7 @@
 # Setup environment scripts for running Anaconda
 
 - name: Setup local Anaconda environment variables
-  blockinfile:
+  template:
+    src: "anaconda.sh.j2"
     dest: "{{ profile_dir }}anaconda.sh"
-    create: yes
-    block: |
-      #!/bin/sh
-
-
-      export PATH="$PATH:{{ anaconda_bin }}"
+  become: yes
