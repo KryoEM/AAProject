@@ -18,7 +18,7 @@ export IMOD_DIR=${IMOD_DIR:={{ imod_install_dir }}IMOD}
 #
 export IMOD_JAVADIR=${IMOD_JAVADIR:=/usr/local/java}
 
-# Put the IMOD programs on the path if it is not already there
+# Put the IMOD programs on the path
 #
 if ! echo ${PATH} | /bin/grep -q "$IMOD_DIR/bin" ; then
     export PATH=$PATH:$IMOD_DIR/bin
