@@ -3,10 +3,10 @@
 
 - name: Setup local Anaconda environment variables
   blockinfile:
-    dest: /etc/profile.d/anaconda.sh
+    dest: "{{ profile_dir }}anaconda.sh"
     create: yes
     block: |
       #!/bin/sh
 
 
-      export PATH="{{ anaconda_bin }}:$PATH"
+      export PATH="$PATH:{{ anaconda_bin }}"

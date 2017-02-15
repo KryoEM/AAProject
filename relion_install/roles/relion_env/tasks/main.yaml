@@ -23,7 +23,7 @@
 
 - name: Setup local Relion environment variables
   blockinfile:
-    dest: /etc/profile.d/relion.sh
+    dest: "{{ profile_dir }}relion.sh"
     create: yes
     block: |
       #!/bin/sh
@@ -76,7 +76,7 @@
 
 - name: Setup local environment variables for Relion python scripts
   blockinfile:
-    dest: /etc/profile.d/relion_custom.sh
+    dest: "{{ profile_dir }}relion_custom.sh"
     create: yes
     block: |
       #!/bin/sh
