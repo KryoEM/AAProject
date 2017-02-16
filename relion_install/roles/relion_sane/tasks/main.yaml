@@ -49,9 +49,6 @@
   get_url:
     url: https://s3.amazonaws.com/kryoem/AAProject/unittest_tiny.tar.gz
     dest: "{{ data_dir }}unittest_tiny.tar.gz"
-#  git:
-#    repo: https://github.com/KryoEM/unittest_tiny.git
-#    dest: "{{ data_dir }}"
 
 
 
@@ -80,7 +77,7 @@
 
 - name: Initializing Relion sanity check
   debug:
-    msg: "About to run sanity check -- this may take several minutes. If the run fails or if the subsequent checks fail, you can troubleshoot the output at {{ test_dir }}"
+    msg: "About to run sanity check -- this may take several minutes. If the run fails or if the subsequent checks fail, you can troubleshoot the output at {{ test_dir }}."
 
 
 - name: Sanity check - run two iterations of Class3D
@@ -113,3 +110,7 @@
   shell: "python cl3d_it2_check.py"
   args:
     chdir: "{{ test_dir }}"
+
+- name: Success!!
+  debug:
+    msg: "Sanity check for Relion has completed. Two iterations of 3D classification were run on GPU across all machines, and a 20A structure was achieved from a 40A initial model. Relion should be fully functional. Just open up an X11 connection to the terminal (e.g. 'ssh -Y user@host.com'), go to your project directory, run the command 'relion' to open up the GUI."
