@@ -30,33 +30,30 @@
     checksum: "{{ anaconda_dl_checksum }}"
   when: not anaconda_bin_path.stat.exists
 
-# run Anaconda installer in batch mode (no manual input)
+# run Anaconda installer in batch mode (i.e. no manual input)
 - name: Run Anaconda installer
   shell: "bash {{ anaconda_installer }} -b -p {{ anaconda_install_dir }} > {{ python_dir}}anaconda_install.out 2> {{ python_install_dir }}anaconda_install.err"
   args:
     chdir: "{{ download_dir }}"
   when: not anaconda_bin_path.stat.exists
 
-# TESTING: See if pip updates if updated via apt
-- name: Try to update pip
-  apt: name={{ item }} state=latest update_cache=yes
-  with_items:
-    - python-pip
-    - python-dev
-    - build-essential
-  become: yes
 
-# requires pip to have been installed by Anaconda 
-- name: Install Python packages mpi4py and simplejson
+- name: Upgrade pip
+  pip:
+    name: pip
+    extra_args: --upgrade
+  environment:
+    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
+
+- name: Install Python packages
   pip:
     name: "{{ item }}"
     state: latest
   with_items:
     - mpi4py
     - simplejson
+    - numpy
+    - psutil
   environment:
-    PATH: "{{ ansible_env.PATH }}:{{ anaconda_bin }}"
-  ignore_errors: yes
-# the ignore_errors is necessary because sometimes the pip module successfully
-# installs but reports failed to ansible because the pip version is not the latest.
-# I believe this is a bug with ansible, so I've included this temporary workaround
+    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
+
