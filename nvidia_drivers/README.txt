@@ -7,7 +7,7 @@ Before running this playbook, you must create an ansible playbook inventory file
 The inventory should list:
 - [installer] host that will perform the installations
 - [machines] hosts that will become Cuda-enabled
-- cuda_install_dir where you want Cuda to be installed
+- cuda_install_dir where you want Cuda to be installed if it does not already exist on your system
 - downloads_dir where you want installers to be downloaded to
 
 Please see the sample inventory in this folder for guidance.

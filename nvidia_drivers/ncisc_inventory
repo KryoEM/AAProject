@@ -12,7 +12,7 @@ node4
 
 # location where Cuda should be installed, if applicable
 [all:vars]
-cuda_install_dir="/mnt/shared/apps/cuda/cuda-8.0/"
+cuda_install_dir="/mnt/shared/cuda/cuda-8.0/"
 
 # location to place downloads
 [installer:vars]
