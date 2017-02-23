@@ -1,9 +1,16 @@
 # Sets up local environment so that CUDA can be found by Relion
 
 ---
+- name: Find Cuda path
+  shell: echo `which nvcc`
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
+    LD_LIBRARY_PATH: "{{ local_lib }}"
+  register: echo_which_nvcc
+
 - name: Symlink cuda install dir to /usr/local/cuda
   file: 
-    src: "{{ cuda_install_dir }}"
+    src: "{{ echo_which_nvcc.stdout|replace("/bin/nvcc","") }}"
     dest: "{{ cuda_symlink }}"
     state: link
   become: yes
