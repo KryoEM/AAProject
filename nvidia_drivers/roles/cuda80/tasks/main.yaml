@@ -3,8 +3,8 @@
   shell: "nvcc --version | grep '8.0'"
   register: nvcc_80
   environment:
-    PATH: "{{ansible_env.PATH}}:{{cuda_bin}}"
-    LD_LIBRARY_PATH: "{{cuda_lib}}"
+    PATH: "{{ansible_env.PATH}}:{{local_bin}}"
+    LD_LIBRARY_PATH: "{{local_lib}}"
   ignore_errors: true # do not stop playbook if CUDA not found
 
 
