@@ -9,11 +9,12 @@
     update_cache: yes
     cache_valid_time: 3600
   with_items:
-    - build-essential # required for C++ compiler & auxillary packages to use in building Relion
-    - tar # required for Ansible unarchie module
-    - unzip # useful for Ansible unarchive module
-    - make # required for building Relion
-    - cmake # required for configuring Relion
+    - build-essential   # required for C++ compiler & auxillary packages to use in building Relion
+    - tar               # required for Ansible unarchie module
+    - unzip             # useful for Ansible unarchive module
+    - make              # required for building Relion
+    - cmake             # required for configuring Relion
+    - xorg-dev          # required for configuring Relion
   become: yes
 
 
