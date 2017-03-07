@@ -1,27 +1,6 @@
 ---
 # Runs a sanity check for Relion using a down-sized unit test.
 
-- set_fact:
-    scratch: "{{scratch_dir}}relion_install_sane/"
-    test_dir: "{{relion_install_dir }}sanity_test/"
-
-- set_fact:
-    cl3d_dir: "{{ test_dir }}Class3D/"
-    data_dir: "{{ test_dir }}data/"
-
-- set_fact:
-    test_particles_dir: "{{ data_dir }}Particles/"
-    test_particles: "{{ data_dir }}shiny_particles_10k_bin16.star"
-    test_ref: "{{ data_dir }}5A1A_4A_bin16_box64.mrc"
-
-- set_fact:
-    hostfile: "cl3d.hosts"
-    cl3d_script: "cl3d_it2.sh"
-    check_script: "cl3d_it2_check.py"
-
-- set_fact:
-    HOST_COUNT: "{{ groups['machines'] | length }}"
-
 - debug:
     msg: "To ensure that everything is working with the installation of Relion, a sanity check will be performed by running two iterations of 3D classification across all machines."
 
@@ -113,4 +92,8 @@
 
 - name: Success!!
   debug:
-    msg: "Sanity check for Relion has completed. Two iterations of 3D classification were run on GPU across all machines, and a 20A structure was achieved from a 40A initial model. Relion should be fully functional. Just open up an X11 connection to the terminal (e.g. 'ssh -Y user@host.com'), go to your project directory, run the command 'relion' to open up the GUI."
+    msg: "Sanity check for Relion has completed. Two iterations of 3D classification were run on GPU across all machines, and a 20A structure was achieved from a 40A initial model. Relion should be fully functional."
+
+- name: Instructions for running Relion
+  debug:
+    msg: "To run Relion, first open up an X11 connection to the terminal (e.g. 'ssh -Y user@host.com'). Then go to your project directory, and run the command 'relion' to open up the GUI."

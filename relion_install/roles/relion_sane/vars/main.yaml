@@ -1,0 +1,15 @@
+scratch: "{{scratch_dir}}relion_install_sane/"
+test_dir: "{{relion_install_dir }}sanity_test/"
+
+cl3d_dir: "{{ test_dir }}Class3D/"
+data_dir: "{{ test_dir }}data/"
+
+test_particles_dir: "{{ data_dir }}Particles/"
+test_particles: "{{ data_dir }}shiny_particles_10k_bin16.star"
+test_ref: "{{ data_dir }}5A1A_4A_bin16_box64.mrc"
+
+hostfile: "cl3d.hosts"
+cl3d_script: "cl3d_it2.sh"
+check_script: "cl3d_it2_check.py"
+
+HOST_COUNT: "{{ groups['machines'] | length }}"
