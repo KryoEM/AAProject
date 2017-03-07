@@ -32,7 +32,7 @@
 
 # run Anaconda installer in batch mode (i.e. no manual input)
 - name: Run Anaconda installer
-  shell: "bash {{ anaconda_installer }} -b -p {{ anaconda_install_dir }} > {{ python_dir}}anaconda_install.out 2> {{ python_install_dir }}anaconda_install.err"
+  shell: "bash {{ anaconda_installer }} -b -p {{ anaconda_install_dir }} > {{ python_dir}}anaconda_install.out 2> {{ python_dir }}anaconda_install.err"
   args:
     chdir: "{{ download_dir }}"
   when: not anaconda_bin_path.stat.exists
