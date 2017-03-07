@@ -18,3 +18,11 @@ shared_dir="/shared/apps/"
 
 # Scratch or tmp directory for temporary files
 scratch_dir="/scratch/"
+
+
+# Variables for developers. Do not use if you are a novice user.
+# Branch of the Relion repository to use
+relion_repo_branch='tbzmotion'
+
+# Version name. Will be used to create a new installation directory
+relion_ver="relion2.0_custom_dev"
