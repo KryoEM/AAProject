@@ -2,12 +2,6 @@
 
 # Base installation of RELION 2.0, without any auxillary software (e.g. motion correction, ctf estimation, etc.)
 
-- name: Relion - clone from repository
-  git: 
-    repo: "{{ relion_repo }}"
-    version: "{{ relion_repo_ver }}"
-    dest: "{{ relion_download_dir }}"
-
 - name: Relion - create a new build directory
 # if build directory exists; remove it
   file:
@@ -26,7 +20,8 @@
   # double precision on/off -DDoublePrec_GPU=ON
   # set computer version of CUDA-capable device (i.e. GPU) -DCUDA_ARCH=61
   # system-wide install location -DCMAKE_INSTALL_PREFIX={{ relion_ver_dir }}
-  shell: cmake -DCUDA_ARCH=61 -DCMAKE_INSTALL_PREFIX={{relion_ver_dir}} .. > cmake.out 2> cmake.err
+  # use the FFTW and FLTK libraries packaged with Relion, instead of local versions
+  shell: cmake -DCUDA_ARCH=61 -DFORCE_OWN_FFTW=ON -DFORCE_OWN_FLTK=ON -DCMAKE_INSTALL_PREFIX={{relion_ver_dir}} .. > cmake.out 2> cmake.err
   args:
     chdir: "{{relion_build_dir }}"
 

@@ -15,8 +15,8 @@ profile_dir: "/etc/profile.d/"
 
 # repository to use to install Relion
 relion_repo: "https://github.com/KryoEM/relion2.git"
-relion_repo_ver: 'master'
-relion_ver: "relion2.0.2_custom"
+relion_repo_branch: 'master'
+relion_ver: "relion2.0_custom"
 
 
 relion_install_dir: "{{ shared_dir }}Relion2.0/"
