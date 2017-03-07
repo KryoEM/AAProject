@@ -1,0 +1,7 @@
+---
+
+# passlib is necessary for Ansible's vars_prompt feature
+- name: Install passlib
+  apt:
+    name: python-passlib
+    state: latest

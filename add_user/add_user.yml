@@ -1,4 +1,10 @@
 ---
+- hosts: localhost
+  become: yes
+  roles:
+    - depends
+
+
 - hosts: add_user
   become: yes
   vars_prompt:
