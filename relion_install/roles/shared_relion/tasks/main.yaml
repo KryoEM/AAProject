@@ -19,6 +19,7 @@
     - "{{relion_download_dir}}"
     - "{{relion_ver_dir}}"
     - "{{motioncorr_ver_dir}}"
+    - "{{motioncor2_ver_dir}}"
     - "{{unblur_ver_dir}}"
     - "{{summovie_ver_dir}}"
     - "{{ctffind4_ver_dir}}"

@@ -6,11 +6,20 @@
 - name: Check if MotionCorr installed
   stat:
     path: "{{motioncorr_exe_path}}"
-  register: motioncorr_path
+  register: stat_motioncorr_exe
 
 - name: Install MotionCorr
-  when: not motioncorr_path.stat.exists
+  when: not stat_motioncorr_exe.stat.exists
   include: install_motioncorr.yaml
+
+
+
+
+- name: MotionCor2 - download and untar executable
+  unarchive:
+    src: "{{ motioncor2_dl_link }}"
+    dest: "{{ motioncor2_install_dir }}"
+    remote_src: yes
 
 
 

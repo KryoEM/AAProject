@@ -45,6 +45,15 @@ motioncorr_src_dir: "{{ motioncorr_ver_dir }}src/"
 motioncorr_exe_path: "{{ motioncorr_ver_dir }}bin/dosefgpu_driftcorr"
 
 
+
+# =============== MOTIONCOR2 VARIABLES ====================
+
+motioncor2_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/MotionCor2-01-30-2017.tar.gz"
+
+motioncor2_install_dir: "{{ shared_dir }}MotionCor2/"
+
+
+
 # ===================== UNBLUR / SUMMOVIE VARIABLES ==========================
 
 # links and paths for installion of Unblur and Summovie
