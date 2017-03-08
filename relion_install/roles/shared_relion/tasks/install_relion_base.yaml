@@ -2,11 +2,13 @@
 
 # Base installation of RELION 2.0, without any auxillary software (e.g. motion correction, ctf estimation, etc.)
 
-- name: Relion - create a new build directory
+- name: Relion - delete the build directory
 # if build directory exists; remove it
   file:
     state: absent
     path: "{{relion_build_dir }}"
+
+- name: Relion - create a new build directory
   file: 
     state: directory
     path: "{{relion_build_dir }}"
