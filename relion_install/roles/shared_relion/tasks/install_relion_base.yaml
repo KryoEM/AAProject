@@ -21,7 +21,7 @@
   # set computer version of CUDA-capable device (i.e. GPU) -DCUDA_ARCH=61
   # system-wide install location -DCMAKE_INSTALL_PREFIX={{ relion_ver_dir }}
   # use the FFTW and FLTK libraries packaged with Relion, instead of local versions
-  shell: cmake -DCUDA_ARCH=61 -DFORCE_OWN_FFTW=ON -DFORCE_OWN_FLTK=ON -DCMAKE_INSTALL_PREFIX={{relion_ver_dir}} .. > cmake.out 2> cmake.err
+  shell: cmake -DCUDA_ARCH={{ cuda_arch }} -DFORCE_OWN_FFTW=ON -DFORCE_OWN_FLTK=ON -DCMAKE_INSTALL_PREFIX={{relion_ver_dir}} .. > cmake.out 2> cmake.err
   args:
     chdir: "{{relion_build_dir }}"
 
