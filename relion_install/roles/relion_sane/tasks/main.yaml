@@ -72,14 +72,14 @@
     - "{{ cl3d_dir }}run_it002_class001_angdist.bild"
     - "{{ cl3d_dir }}run_it002_class001.mrc"
     - "{{ cl3d_dir }}run_it002_model.star"
-  register: cl3d_it002_stat 
+#   register: cl3d_it002_stat 
 
 - name: Sanity check - ensure Class3D output files were produced
   assert:
     that:
       - item.stat.exists
       - item.stat.size > 0      
-    msg: "Could not find expected output file or the file is empty: {{ item }}"
+    msg: "Could not find expected output file or the file is empty: {{ item.stat.path }}"
   with_items: "{{ cl3d_it002_stat.results }}"
   no_log: true #logging turned off due to frighteningly high verbosity of output
 
