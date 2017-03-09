@@ -1,9 +1,12 @@
+# ==========================================================
+# Required variables. You must set values for these.
+# ==========================================================
 
 # Host that will perform installation of shared software
 [installer]
 localhost
 
-# All hosts that will be Relion-enabled
+# Hosts that will be Relion-enabled
 [machines]
 node1
 node2
@@ -26,9 +29,17 @@ cuda_arch="61"
 
 
 
-# Variables for developers. Do not use if you are a novice user.
+
+
+# ==========================================================
+# Expert options. You do not need to set these. Do not use if you are a novice user.
+# ==========================================================
+
 # Branch of the Relion repository to use
-relion_repo_branch='tbzmotion'
+relion_repo_branch='master'
 
 # Version name. Will be used to create a new installation directory
-relion_ver="relion2.0_custom_dev"
+relion_ver="relion2.0_custom"
+
+# Threads to use for installations
+threads=1
