@@ -63,20 +63,6 @@
 
 
 
-- name: "Verify FFTW and FLTK lib exist"
-  file:
-    path: "{{relion_ver_dir}}lib/"
-    state: directory
-
-- name: Relion - ensure paths to FFTW and FLTK libraries exist
-  shell: "cp -d -n {{relion_download_dir}}external/*/lib/lib* {{relion_ver_dir}}lib/"
-  # -d to preserve links
-  # -n no-clobber, will not overwrite existing files
-
-
-
-
-
 - name: Relion - check for custom Python scripts
   stat:
     path: "{{ relion_download_dir }}python/"
