@@ -72,7 +72,7 @@
     - "{{ cl3d_dir }}run_it002_class001_angdist.bild"
     - "{{ cl3d_dir }}run_it002_class001.mrc"
     - "{{ cl3d_dir }}run_it002_model.star"
-#   register: cl3d_it002_stat 
+  register: cl3d_it002_stat 
 
 - name: Sanity check - ensure Class3D output files were produced
   assert:
