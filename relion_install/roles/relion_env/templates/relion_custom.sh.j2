@@ -1,5 +1,9 @@
 #!/bin/sh
 
-# Set up environment variables for custom RELION 2.0 scripts if they do not already exist
+# Set up environment variables for custom RELION 2.0 python scripts if they do not already exist
 [[ ":$PATH:" != *":{{ relion_python_dir }}:"* ]] && export PATH="${PATH}:{{ relion_python_dir }}"
 [[ ":$PYTHONPATH:" != *":{{ relion_python_dir }}:"* ]] && export PYTHONPATH="${PYTHONPATH}:{{ relion_python_dir }}"
+
+
+# Set up environment variable for Ansible-generated default mpirun hosts file
+RELION_DEFAULT_HOSTFILE="{{ relion_default_hostfile }}"

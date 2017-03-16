@@ -79,10 +79,10 @@
 
 
 
-- name: Relion - add sample mpirun hosts file
+- name: Relion - add default mpirun hosts file to installation directory
   template:
     src: "mpirun_default.hosts.j2"
-    dest: "{{ relion_ver_dir }}mpirun_default.hosts"
+    dest: "{{ relion_default_hostfile }}"
 
 
 
