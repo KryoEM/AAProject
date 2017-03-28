@@ -95,13 +95,14 @@ ctffind4_exe_path: "{{ ctffind4_ver_dir }}bin/ctffind"
 
 # Installion of Gctf
 gctf_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/Gctf_v1.06_and_examples.tar.gz"
+gctf_ver: "Gctf_v1.06"
 
 # defacult gctf executable to use
 gctf_exe: "Gctf-v1.06_sm_30_cu8.0_x86_64"
 
 
 gctf_install_dir: "{{shared_dir}}Gctf/"
-gctf_exe_path: "{{ gctf_install_dir }}bin/{{ gctf_exe }}"
+gctf_exe_path: "{{ gctf_install_dir }}{{gctf_ver}}/bin/{{ gctf_exe }}"
 
 
 # ===================== RESMAP VARIABLES ==========================
