@@ -3,4 +3,4 @@
 
 source {{ relion_env_script }}
 
-mpirun -mca orte_base_help_aggregate 0 --hostfile {{ hostfile }} -np {{ HOST_COUNT|int + 1 }} bash -l -c "`which relion_refine_mpi` --o {{ cl3d_dir }}run --i {{ test_particles }} --ref {{ test_ref }} --firstiter_cc --ini_high 40 --dont_combine_weights_via_disc --scratch_dir {{ scratch }} --pool 3 --ctf --ctf_corrected_ref --iter 2 --tau2_fudge 4 --particle_diameter 200 --K 1 --flatten_solvent --zero_mask --oversampling 1 --offset_range 5 --offset_step 2 --sym D2 --norm --scale  --j 1 --gpu" > class3d.out 2> class3d.err
+mpirun -mca orte_base_help_aggregate 0 --map-by node --hostfile {{ hostfile }} -np {{ HOST_COUNT|int + 1 }} bash -l -c "`which relion_refine_mpi` --o {{ cl3d_dir }}run --i {{ test_particles }} --ref {{ test_ref }} --firstiter_cc --ini_high 40 --dont_combine_weights_via_disc --scratch_dir {{ scratch }} --pool 3 --ctf --ctf_corrected_ref --iter 2 --tau2_fudge 4 --particle_diameter 200 --K 1 --flatten_solvent --zero_mask --oversampling 1 --offset_range 5 --offset_step 2 --sym D2 --norm --scale  --j 1 --gpu" > class3d.out 2> class3d.err
