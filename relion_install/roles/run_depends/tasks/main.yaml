@@ -9,6 +9,7 @@
     cache_valid_time: 3600
   with_items:
     - evince          # for viewing PDFs from the GUI
+    - ghostscript     # for generating files from polishing
     - pdftk           # for running ctffind_plot_results.sh
     - gnuplot         # for running ctffind_plot_results.sh
     - tcsh            # for IMOD
