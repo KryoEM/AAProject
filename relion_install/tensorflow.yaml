@@ -1,0 +1,10 @@
+---
+- name: Install TensorFlow dependencies
+  hosts: machines
+  roles:
+    - tensorflow_depends
+
+- name: Install TensorFlow
+  hosts: installer
+  roles:
+  - shared_tensorflow
