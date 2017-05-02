@@ -8,6 +8,7 @@
   unarchive:
     src: "{{ cudnn_link }}"  
     dest: "{{ cuda_lib_path }}"
+    remote_src: True
 
 
 - name: Upgrade pip
