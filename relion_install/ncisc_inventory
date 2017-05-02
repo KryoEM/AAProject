@@ -32,7 +32,7 @@ cuda_arch="61"
 
 
 # ==========================================================
-# Expert options. You do not need to set these. Do not use if you are a novice user.
+# Expert options. These do not need to be set; do not change them if you are a novice user.
 # ==========================================================
 
 # Branch of the Relion repository to use
