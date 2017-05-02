@@ -1,4 +1,4 @@
-cuda_lib_path: "/usr/local/cuda/lib64"
+cuda_lib_path: "/usr/local/cuda/"
 
 cudnn_link: "https://s3.amazonaws.com/kryoem/AAProject/cudnn-8.0-linux-x64-v5.1.tgz"
 
