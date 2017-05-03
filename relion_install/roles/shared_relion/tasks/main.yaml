@@ -14,8 +14,6 @@
     - "{{resmap_install_dir}}"
 
 
-
-
 - name: Relion - clone or pull from git repository
   git: 
     repo: "{{ relion_repo }}"
