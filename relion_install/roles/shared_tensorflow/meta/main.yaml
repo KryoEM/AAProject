@@ -1,3 +1,5 @@
 ---
 dependencies:
-- { role: shared_python, tensorflow_depends, cuda_check }
+- { role: shared_python }
+- { role: tensorflow_depends }
+- { role: cuda_check }
