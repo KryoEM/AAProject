@@ -1,0 +1,13 @@
+---
+# Install dependencies for TensorFlow on each machine.
+
+- name: Install libcupti-dev library
+  apt:
+    name: "{{ item }}"
+    state: latest
+    update_cache: yes
+    cache_valid_time: 3600
+  with_items:
+    - libprotobuf-dev
+    - libcupti-dev
+  become: yes

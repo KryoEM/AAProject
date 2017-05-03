@@ -16,6 +16,8 @@
   roles:
     - shared_python
 
+- include: tensorflow.yaml
+
 - name: Install Relion and auxiliary software on shared drive
   hosts: installer
   roles:

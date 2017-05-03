@@ -1,0 +1,5 @@
+---
+dependencies:
+- { role: shared_python }
+- { role: tensorflow_depends }
+- { role: cuda_check }

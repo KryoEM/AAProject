@@ -1,0 +1,16 @@
+# Install TensorFlow and related libraries with GPU support.
+
+---
+- name: Install cuDNN library
+  unarchive:
+    src: "{{ cudnn_link }}"  
+    dest: "{{ cuda_lib_path }}"
+    remote_src: True
+
+- name: Install TensorFlow for GPU via pip
+  pip:
+    name: tensorflow-gpu
+    state: present
+    version: "{{ tensorflow_ver }}"
+  environment:
+    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"

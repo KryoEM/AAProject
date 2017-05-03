@@ -1,16 +1,3 @@
-- name: Check if CUDA installed 
-  shell: "nvcc --version | grep '8.0'"
-  register: nvcc_80
-  environment:
-    PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
-    LD_LIBRARY_PATH: "{{ local_lib }}"
-  ignore_errors: true # do not stop playbook if CUDA not found
-
-
-- when: nvcc_80|failed
-  pause:
-    prompt: "WARNING: Could not find CUDA. If you want GPU support, you must install CUDA first, for example by running the 'nvidia_drivers' playbook. You can now exit this playbook with 'ctrl-c' then 'a'. If you want to continue installing Relion without GPU support, hit 'enter'."
-
 - name: Create individual software directories
   file:
     state: directory

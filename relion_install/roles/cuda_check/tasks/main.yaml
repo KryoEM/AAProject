@@ -1,0 +1,18 @@
+---
+
+# Checks that CUDA 8.0 is installed. Fails if it is not installed.
+
+
+- name: Check if CUDA installed 
+  shell: "nvcc --version | grep '8.0'"
+  register: nvcc_80
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
+    LD_LIBRARY_PATH: "{{ local_lib }}"
+  ignore_errors: true # do not stop playbook just yet if CUDA not found
+
+
+- name: If CUDA not found
+  when: nvcc_80|failed
+  fail:
+    msg: "FATAL ERROR: CUDA 8.0 not found. Play will now abort. Please install CUDA 8.0."
