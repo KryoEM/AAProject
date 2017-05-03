@@ -12,6 +12,7 @@
   ignore_errors: true # do not stop playbook just yet if CUDA not found
 
 
-- when: nvcc_80|failed
+- name: If CUDA not found
+  when: nvcc_80|failed
   fail:
     msg: "FATAL ERROR: CUDA 8.0 not found. Play will now abort. Please install CUDA 8.0."
