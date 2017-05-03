@@ -7,6 +7,13 @@
     dest: "{{ cuda_lib_path }}"
     remote_src: True
 
+- name: Uninstall any existing protobuf package via pip
+  pip:
+    name: protobuf
+    state: absent
+  environment:
+    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
+
 - name: Install TensorFlow for GPU via pip
   pip:
     name: tensorflow-gpu
