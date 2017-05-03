@@ -9,14 +9,20 @@
 
 - name: Update setuptools via conda
   command: conda update -y setuptools
+  environment:
+    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
 
 - name: Install TensorFlow for GPU via pip
   pip:
     name: tensorflow-gpu
     state: present
     version: "{{ tensorflow_ver }}"
+  environment:
+    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
 
 - name: Install protobuf via pip
   pip:
     name: protobuf
     state: latest
+  environment:
+    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"

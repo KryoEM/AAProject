@@ -8,5 +8,3 @@
   hosts: installer
   roles:
     - shared_tensorflow
-  environment:
-    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
