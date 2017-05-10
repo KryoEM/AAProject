@@ -29,7 +29,8 @@ relion_exe_path: "{{relion_ver_dir}}bin/relion"
 
 relion_python_dir: "{{relion_ver_dir}}python"
 
-relion_default_hostfile: "{{ relion_ver_dir }}mpirun_default.hosts"
+relion_default_hostfile: "{{ relion_ver_dir }}gpu.hosts"
+relion_default_hostfile_cpu: "{{ relion_ver_dir }}cpu.hosts"
 
 
 relion_env_script: "{{ profile_dir }}relion.sh"

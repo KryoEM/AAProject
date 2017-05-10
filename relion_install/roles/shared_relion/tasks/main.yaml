@@ -67,9 +67,7 @@
 
 
 - name: Relion - add default mpirun hosts file to installation directory
-  template:
-    src: "mpirun_default.hosts.j2"
-    dest: "{{ relion_default_hostfile }}"
+  include: hostfiles.yaml
 
 
 
