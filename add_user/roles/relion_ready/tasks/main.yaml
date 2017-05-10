@@ -1,0 +1,33 @@
+---
+# Ensure that the user is Relion-ready on the shared drive.
+
+
+- name: "Create personal folder on shared drive: {{ process_dir }}"
+  file:
+    path: "{{ process_dir }}"
+    state: directory
+    mode: 0755
+    owner: "{{ user }}"
+
+
+
+- name: Determine number of available GPUs
+  shell: nvidia-smi --query-gpu=name --format=csv,noheader | wc -l 
+  register: num_gpu
+
+- name: Create default GPU hosts file in personal folder
+  template:
+    src: "gpu.hosts.j2"
+    dest: "{{ process_dir }}gpu.hosts"
+    owner: "{{ user }}"
+
+
+- name: Determine number of available CPUs
+  shell: grep -c ^processor /proc/cpuinfo
+  register: num_cpu
+
+- name: Create default CPU hosts file
+  template:
+    src: "cpu.hosts.j2"
+    dest: "{{ process_dir }}cpu.hosts"
+    owner: "{{ user }}"
