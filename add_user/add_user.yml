@@ -9,10 +9,10 @@
   become: yes
   vars_prompt:
     - name: user
-      prompt: "Username"
+      prompt: "create username"
       private: no
     - name: password
-      prompt: "Password"
+      prompt: "create password"
       private: yes
       encrypt: sha512_crypt
       confirm: yes
