@@ -22,7 +22,7 @@
 
 - debug:
     msg: "Public keys deployed. User is now authorized to SSH as themselves into other nodes without password prompt."
-    run_once: true
+  run_once: true
 
 
 
@@ -60,4 +60,4 @@
 
 - debug:
     msg: "Public key of sudo user deployed. Sudo user can SSH into new user without password prompt."
-    run_once: true 
+  run_once: true 
