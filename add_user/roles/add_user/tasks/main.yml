@@ -21,7 +21,24 @@
     - "{{ groups['add_user'] }}" 
 
 - debug:
-    msg: "SSH keys deployed. User is now authorized to SSH as themselves into other nodes without password prompt."
+    msg: "Public keys deployed. User is now authorized to SSH as themselves into other nodes without password prompt."
+    run_once: true
+
+
+
+
+- name: Add new user as known host across all nodes
+  known_hosts:
+    path: "/home/{{ user }}/.ssh/known_hosts"
+    name: "{{ inventory_hostname }}"
+    key: "{{ inventory_hostname }} {{ ssh_key.stdout }}"
+  delegate_to: "{{ item }}"
+  with_items:
+   - "{{ groups['add_user'] }}"
+
+
+
+
 
 
 - name: Get name of current sudo user running Ansible
@@ -42,4 +59,5 @@
     - "{{ groups['add_user'] }}"
 
 - debug:
-    msg: "SSH key of sudo user deployed. Sudo user can SSH into new user without password prompt."
+    msg: "Public key of sudo user deployed. Sudo user can SSH into new user without password prompt."
+    run_once: true 
