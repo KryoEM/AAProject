@@ -1,0 +1,11 @@
+---
+
+- hosts: add_user
+  become: yes
+  vars_prompt:
+    - name: user
+      prompt: "user to remove"
+      private: no
+      confirm: yes
+  roles:
+    - remove_user

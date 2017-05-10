@@ -1,0 +1,7 @@
+---
+
+- name: Remove user and their files, similar to userdel --remove
+  user:
+    name: "{{ user }}"
+    state: absent
+    remove: yes
