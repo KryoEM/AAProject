@@ -1,6 +1,7 @@
 - name: Determine number of available GPUs
   shell: nvidia-smi --query-gpu=name --format=csv,noheader | wc -l 
   register: num_gpu
+  delegate_to: "{{ groups['machines'] }}"
 
 - name: Create default GPU hostfile
   template:
@@ -11,6 +12,7 @@
 - name: Determine number of available CPUs
   shell: grep -c ^processor /proc/cpuinfo
   register: num_cpu
+  delegate_to: "{{ groups['machines'] }}"
 
 - name: Create default CPU hostfile
   template:
