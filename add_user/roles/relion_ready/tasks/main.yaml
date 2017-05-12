@@ -8,6 +8,7 @@
     state: directory
     mode: 0755
     owner: "{{ user }}"
+  run_once: True 
 
 
 
@@ -20,6 +21,7 @@
     src: "gpu.hosts.j2"
     dest: "{{ process_dir }}gpu.hosts"
     owner: "{{ user }}"
+  run_once: True 
 
 
 - name: Determine number of available CPUs
@@ -31,3 +33,4 @@
     src: "cpu.hosts.j2"
     dest: "{{ process_dir }}cpu.hosts"
     owner: "{{ user }}"
+  run_once: True 

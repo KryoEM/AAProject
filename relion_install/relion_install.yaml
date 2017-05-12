@@ -34,6 +34,7 @@
 - name: Set up the environment variables for all machines
   hosts: machines
   roles:
+    - relion_hostfile
     - relion_env
     - imod_env
     - python_env
