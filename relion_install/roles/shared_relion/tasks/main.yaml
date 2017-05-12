@@ -32,7 +32,7 @@
 
 
 - name: Display message
-  when: relion_exe_stat.stat.exists and {{ relion_git.before == relion_git.after }}
+  when: relion_exe_stat.stat.exists and relion_git.before == relion_git.after
   debug:
     msg: "Relion 2.0 seems to already be installed, with an executable at {{relion_exe_path}} If you want to re-do the installation, please delete the existing installation folder {{ relion_ver_dir }} first. If you are a developer and want to install another version of Relion 2.0 in a different location, please change the variable 'relion_ver_dir' in the variables file 'group_vars/all'. The playbook will now continue with the existing Relion 2.0 installation."
 
@@ -41,7 +41,7 @@
 # 1) there is no relion executable found in the install path 
 # 2) if the repository has been updated
 - name: Install Relion 2.0
-  when: not relion_exe_stat.stat.exists or {{ relion_git.before != relion_git.after }}
+  when: not relion_exe_stat.stat.exists or relion_git.before != relion_git.after
   include: install_relion_base.yaml
   environment:
     PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
@@ -62,13 +62,6 @@
     recursive: yes
     delete: yes
   when: relion_dl_python_check.stat.exists
-
-
-
-
-- name: Relion - add default mpirun hosts file to installation directory
-  include: hostfiles.yaml
-
 
 
 
