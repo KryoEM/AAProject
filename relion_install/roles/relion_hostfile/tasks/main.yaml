@@ -1,5 +1,3 @@
----
-
 - name: Determine number of available GPUs
   shell: nvidia-smi --query-gpu=name --format=csv,noheader | wc -l 
   register: num_gpu
