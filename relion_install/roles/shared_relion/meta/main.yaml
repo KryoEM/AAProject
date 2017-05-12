@@ -1,3 +1,3 @@
 ---
 dependencies:
-- { role: build_depends, run_depends, shared_python, cuda_check }
+- { role: cuda_check }
