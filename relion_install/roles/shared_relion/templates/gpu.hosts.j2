@@ -1,4 +1,4 @@
-{% for host in groups['add_user'] %}
+{% for host in groups['machines'] %}
 {% if loop.index == 1 %}
 {{ host }} slots={{1 + hostvars[host].num_gpu.stdout|int }}
 {% else %}
