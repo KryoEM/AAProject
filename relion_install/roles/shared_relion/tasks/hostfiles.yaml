@@ -9,7 +9,7 @@
     src: "gpu.hosts.j2"
     dest: "{{ relion_default_hostfile }}"
   run_once: True 
-
+  delegate_to: "{{ groups['installer'] | first }}"
 
 - name: Determine number of available CPUs
   shell: grep -c ^processor /proc/cpuinfo
@@ -20,3 +20,4 @@
     src: "cpu.hosts.j2"
     dest: "{{ relion_default_hostfile_cpu }}"
   run_once: True 
+  delegate_to: "{{ groups['installer'] | first }}"
