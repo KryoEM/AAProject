@@ -66,8 +66,8 @@
 
 
 
-#- name: Relion - add default mpirun hosts file to installation directory
-#  include: hostfiles.yaml
+- name: Relion - add default mpirun hosts file to installation directory
+  include: hostfiles.yaml
 
 
 
