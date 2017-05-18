@@ -1,7 +1,7 @@
 {% for host in groups['machines'] %}
 {% if loop.index == 1 %}
-{{ host }} slots={{1 + hostvars[host].num_cpu.stdout|int }}
+{{ host }} slots={{ (1 + (hostvars[host].num_cpu.stdout|int) / 2)|int }}
 {% else %}
-{{ host }} slots={{ hostvars[host].num_cpu.stdout|int }}
+{{ host }} slots={{ ((hostvars[host].num_cpu.stdout|int) / 2)|int }}
 {% endif %}
 {% endfor %}
