@@ -1,3 +1,9 @@
 [add_user]
 node3
 node4
+
+
+[all:vars]
+# Shared directory where user will be given a personal folder
+# include trailing slash
+shared_dir="/shared/process/"
