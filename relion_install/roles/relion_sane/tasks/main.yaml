@@ -5,21 +5,17 @@
     msg: "To ensure that everything is working with the installation of Relion, a sanity check will be performed by running two iterations of 3D classification across all machines."
 
 
-- name: Sanity check - clear testing directory and scratch space
+- name: Sanity check - clear testing directory
   file:
     state: absent
-    path: "{{ item }}"
-  with_items:
-    - "{{ scratch }}"
-    - "{{ test_dir }}"
+    path: "{{ test_dir }}"
 
 
-- name: Sanity check - create new testing directory and scratch space
+- name: Sanity check - create new testing directory
   file:
     state: directory
     path: "{{ item }}"
   with_items:
-    - "{{ scratch }}"
     - "{{ cl3d_dir }}"
     - "{{ data_dir }}"
 
@@ -28,8 +24,6 @@
   get_url:
     url: https://s3.amazonaws.com/kryoem/AAProject/unittest_tiny.tar.gz
     dest: "{{ data_dir }}unittest_tiny.tar.gz"
-
-
 
 - name: Sanity check - untar testing data set
   unarchive:
@@ -89,6 +83,11 @@
   shell: "python cl3d_it2_check.py"
   args:
     chdir: "{{ test_dir }}"
+
+- name: Remove test data
+  file:
+    path: "{{ data_dir }}"
+    state: absent
 
 - name: Success!!
   debug:
