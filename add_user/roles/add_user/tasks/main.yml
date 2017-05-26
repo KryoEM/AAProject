@@ -25,20 +25,30 @@
   run_once: true
 
 
+- name: Set known hosts file
+  set_fact: 
+    known_hosts_file: "/home/{{ user }}/.ssh/known_hosts"
 
 
 - name: Add new user as known host across all nodes
   known_hosts:
-    path: "/home/{{ user }}/.ssh/known_hosts"
+    path: "{{ known_hosts_file }}"
     name: "{{ inventory_hostname }}"
-    key: "{{ inventory_hostname }} {{ ssh_key.stdout }}"
+    key: "{{ inventory_hostname }} ecdsa-sha2-nistp256 {{ansible_ssh_host_key_ecdsa_public}}"
+    hash_host: yes
   delegate_to: "{{ item }}"
   with_items:
    - "{{ groups['add_user'] }}"
 
 
+- name: Return ownership of known hosts file to new user
+  file:
+    path: "{{ known_hosts_file }}"
+    owner: "{{ user }}"
 
-
+- debug:
+    msg: "Known hosts added. User can now SSH as themselves into other nodes without initial RSA key check."
+  run_once: true
 
 
 - name: Get name of current sudo user running Ansible
