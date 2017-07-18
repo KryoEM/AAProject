@@ -1,0 +1,5 @@
+---
+- name: RELION Sanity check
+  hosts: installer
+  roles:
+    - relion_sane

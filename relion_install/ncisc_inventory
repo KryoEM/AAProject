@@ -25,7 +25,7 @@ scratch_dir="/scratch/"
 # Compute capability of CUDA-enabled GPUs
 # Input as a whole integer, e.g. computer capability 6.1 should be cuda_arch="61"
 # For the compute capability of your card, see: https://developer.nvidia.com/cuda-gpus
-cuda_arch="61"
+cuda_arch="30"
 
 
 
@@ -36,10 +36,10 @@ cuda_arch="61"
 # ==========================================================
 
 # Branch of the Relion repository to use
-relion_repo_branch='master'
+relion_repo_branch='summer_devel'
 
 # Version name. Will be used to create a new installation directory
-relion_ver="relion2.0_custom"
+relion_ver="relion2.1-beta"
 
 # Threads to use for installations
-threads=16
+threads=8
