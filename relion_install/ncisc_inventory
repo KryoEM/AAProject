@@ -8,16 +8,17 @@ localhost
 
 # Hosts that will be Relion-enabled
 [machines]
-node1
-node2
-node3
-node4
-
+localhost
+#worker1
+#worker2
+#worker3
+#worker4
+#worker5
 
 
 [all:vars]
 # Shared directory where bulk of software will be installed
-shared_dir="/shared/apps/"
+shared_dir="/lvol/apps/"
 
 # Scratch or tmp directory for temporary files
 scratch_dir="/scratch/"
@@ -25,9 +26,7 @@ scratch_dir="/scratch/"
 # Compute capability of CUDA-enabled GPUs
 # Input as a whole integer, e.g. computer capability 6.1 should be cuda_arch="61"
 # For the compute capability of your card, see: https://developer.nvidia.com/cuda-gpus
-cuda_arch="30"
-
-
+cuda_arch="50"
 
 
 
@@ -35,11 +34,21 @@ cuda_arch="30"
 # Expert options. These do not need to be set; do not change them if you are a novice user.
 # ==========================================================
 
+####### Stock Relion settings ####################
+# repository to use to clone Relion from
+relion_repo="https://github.com/3dem/relion.git"
 # Branch of the Relion repository to use
-relion_repo_branch='summer_devel'
-
+relion_repo_branch='master'
 # Version name. Will be used to create a new installation directory
-relion_ver="relion2.1-beta"
+relion_ver="v.2.1-beta-1"
+
+####### Custom Relion Settings ###################
+## repository to use to clone Relion from
+#relion_repo="https://github.com/KryoEM/relion2.git"
+## Branch of the Relion repository to use
+#relion_repo_branch='master'
+## Version name. Will be used to create a new installation directory
+#relion_ver="relion2.06_patched"
 
 # Threads to use for installations
-threads=8
+threads=16

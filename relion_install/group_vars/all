@@ -13,8 +13,8 @@ profile_dir: "/etc/profile.d/"
 
 # ================= RELION VARIABLES =====================
 
-# repository to use to install Relion
-relion_repo: "https://github.com/KryoEM/relion2.git"
+# repository to use to install Relion - moved to inventory
+# relion_repo: "https://github.com/KryoEM/relion2.git"
 
 
 relion_install_dir: "{{ shared_dir }}Relion2.0/"
@@ -155,4 +155,4 @@ python_dir: "{{shared_dir}}python/"
 
 anaconda_installer: "{{ anaconda_ver }}.sh"
 anaconda_install_dir: "{{ python_dir }}{{ anaconda_ver }}/"
-anaconda_bin: "{{ anaconda_install_dir }}bin"
+python_bin: "{{ anaconda_install_dir }}bin"

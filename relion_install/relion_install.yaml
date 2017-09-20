@@ -28,6 +28,11 @@
   hosts: installer
   roles:
     - shared_imod
+    
+#- name: Install Lmod
+#  hosts: installer
+#  roles:
+#    - shared_lmod
 
 
 # set up the environment variables for all machines

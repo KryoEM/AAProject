@@ -10,6 +10,7 @@
 - name: Uninstall any existing protobuf package via pip
   pip:
     name: protobuf
+    executable: "{{ python_bin }}/pip"
     state: absent
   environment:
     PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
@@ -17,6 +18,7 @@
 - name: Install TensorFlow for GPU via pip
   pip:
     name: tensorflow-gpu
+    executable: "{{ python_bin }}/pip"
     state: present
     version: "{{ tensorflow_ver }}"
   environment:
