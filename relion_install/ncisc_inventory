@@ -8,17 +8,17 @@ localhost
 
 # Hosts that will be Relion-enabled
 [machines]
-localhost
-#worker1
+#localhost
+worker1
 #worker2
-#worker3
-#worker4
+worker3
+worker4
 #worker5
-
 
 [all:vars]
 # Shared directory where bulk of software will be installed
-shared_dir="/lvol/apps/"
+#shared_dir="/lvol/apps/"
+shared_dir="/jasper/apps/"
 
 # Scratch or tmp directory for temporary files
 scratch_dir="/scratch/"
@@ -26,9 +26,7 @@ scratch_dir="/scratch/"
 # Compute capability of CUDA-enabled GPUs
 # Input as a whole integer, e.g. computer capability 6.1 should be cuda_arch="61"
 # For the compute capability of your card, see: https://developer.nvidia.com/cuda-gpus
-cuda_arch="50"
-
-
+cuda_arch="52"
 
 # ==========================================================
 # Expert options. These do not need to be set; do not change them if you are a novice user.

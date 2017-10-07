@@ -56,6 +56,9 @@
     - simplejson
     - numpy
     - psutil
+    - scandir	
+    - opencv-python
+    - joblib
   environment:
     PATH: "{{ python_bin }}:{{ ansible_env.PATH }}"
 

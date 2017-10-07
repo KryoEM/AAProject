@@ -22,7 +22,7 @@ This is an Ansible playbook for automated installation of Relion and associated 
 
 2.	Running the playbook:
 	
-	ansible-playbook --i inventory --ask-sudo-pass relion_install.yaml 
+	ansible-playbook -i ncisc_inventory --ask-sudo-pass relion_install.yaml 
 
 
 
