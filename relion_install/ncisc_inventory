@@ -10,10 +10,10 @@ localhost
 [machines]
 #localhost
 worker1
-#worker2
+worker2
 worker3
 worker4
-#worker5
+worker5
 
 [all:vars]
 # Shared directory where bulk of software will be installed
