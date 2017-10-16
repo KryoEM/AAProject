@@ -40,4 +40,4 @@
     src: "relion_custom.sh.j2"
     dest: "{{ profile_dir }}relion_custom.sh"
   become: yes
-  when: relion_python_check.stat.exists
+# when: relion_python_check.stat.exists
