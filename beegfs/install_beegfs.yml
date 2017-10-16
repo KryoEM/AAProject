@@ -1,21 +1,21 @@
 ---
-- hosts: all
-  become: yes
-  gather_facts: True
-  roles:
-    - common
+#- hosts: all
+#  become: yes
+#  gather_facts: True
+#  roles:
+#    - common
   
-- hosts: mgmt
-  become: yes
-  gather_facts: True
-  roles:
-    - mgmt
+#- hosts: mgmt
+#  become: yes
+#  gather_facts: True
+#  roles:
+#    - mgmt
   
-- hosts: storage
-  become: yes
-  gather_facts: True
-  roles:
-    - storage
+#- hosts: storage
+#  become: yes
+#  gather_facts: True
+#  roles:
+#    - storage
   
 - hosts: metadata
   become: yes
@@ -23,8 +23,8 @@
   roles:
     - metadata
       
-- hosts: client
-  become: yes
-  gather_facts: True
-  roles:
-    - client
+#- hosts: client
+#  become: yes
+#  gather_facts: True
+#  roles:
+#    - client
