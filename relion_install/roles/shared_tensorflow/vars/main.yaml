@@ -1,5 +1,6 @@
 cuda_lib_path: "/usr/local/"
 
-cudnn_link: "https://s3.amazonaws.com/kryoem/AAProject/cudnn-8.0-linux-x64-v5.1.tgz"
+#cudnn_link: "https://s3.amazonaws.com/kryoem/AAProject/cudnn-8.0-linux-x64-v5.1.tgz"
+cudnn_link: "https://s3.amazonaws.com/kryoem/AAProject/cudnn-8.0-linux-x64-v6.0.tgz"
 
-tensorflow_ver: "1.3"
+tensorflow_ver: "1.4"

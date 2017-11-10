@@ -122,14 +122,17 @@ resmap_exe_path: "{{resmap_install_dir}}{{resmap_ver}}"
 
 
 # download link to IMOD installer
-imod_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/imod_4.7.15_RHEL6-64_CUDA6.0.csh"
+#imod_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/imod_4.7.15_RHEL6-64_CUDA6.0.csh"
+imod_dl_link: "https://s3.amazonaws.com/kryoem/AAProject/imod_4.9.5_RHEL7-64_CUDA8.0.csh"
+
 
 # checksum for IMOD installer
 imod_dl_checksum: "sha256:b938416944a5860f6930a399ea044d4ef0241280fe46c55240ba3901d5e1a01e"
 
 
 # version name for this IMOD version
-imod_ver: "imod_4.7.15_RHEL6-64_CUDA6.0"
+#imod_ver: "imod_4.7.15_RHEL6-64_CUDA6.0"
+imod_ver: "imod_4.9.9_RHEL7-64_CUDA8.0"
 
 
 imod_installer_name: "{{ imod_ver }}.csh"

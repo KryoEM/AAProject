@@ -13,7 +13,7 @@
     executable: "{{ python_bin }}/pip"
     state: absent
   environment:
-    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
+    PATH: "{{ python_bin }}:{{ ansible_env.PATH }}"
 
 - name: Install TensorFlow for GPU via pip
   pip:
@@ -22,4 +22,4 @@
     state: present
     version: "{{ tensorflow_ver }}"
   environment:
-    PATH: "{{ anaconda_bin }}:{{ ansible_env.PATH }}"
+    PATH: "{{ python_bin }}:{{ ansible_env.PATH }}"
