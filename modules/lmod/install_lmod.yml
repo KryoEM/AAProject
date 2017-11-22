@@ -1,0 +1,15 @@
+---
+- name: Install LMOD dependencies
+  hosts: workers
+  roles:
+    - lmod_depends
+
+- name: Install LMOD to shared drive from the installer machine
+  hosts: installer
+  roles:
+    - shared_install
+    
+- name: Add LMOD environment setup script to /etc/profile.d on all machines
+  hosts: workers
+  roles:
+    - lmod_env

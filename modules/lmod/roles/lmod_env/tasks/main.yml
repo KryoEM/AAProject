@@ -1,0 +1,4 @@
+---
+- name: Copy LMOD profile.d script to all machines
+  copy: src={{ install_dir }}/lmod/lmod/init/profile dest=/etc/profile.d/lmod.sh mode=0755
+  become: yes

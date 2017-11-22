@@ -1,0 +1,22 @@
+---
+- name: Check if LMOD is already installed
+  command: which module
+  register: lmod_exist
+  ignore_errors: yes
+  
+- name: Install LMOD to shared drive if it doesn't already exist
+  block:
+    - get_url: url={{ lmod_dl }} dest=/tmp/{{ lmod_ver }}.tar.bz2
+    - unarchive: src=/tmp/{{ lmod_ver }}.tar.bz2 dest=/tmp
+    - file: path={{ install_dir }} state=directory
+    - shell: ./configure --prefix={{ install_dir }}
+      args:
+        chdir: /tmp/{{ lmod_ver }}
+        executable: /bin/bash
+    - shell: make install
+      args:
+        chdir: /tmp/{{ lmod_ver }}
+        executable: /bin/bash
+    - file: path=/tmp/{{ lmod_ver }} state=absent
+  when: lmod_exist.rc == 1
+    

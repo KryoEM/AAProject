@@ -1,0 +1,15 @@
+[installer]
+localhost
+
+[workers]
+worker0
+worker1
+worker2
+worker3
+worker4
+worker5
+
+[all:vars]
+install_dir="/jasper/apps"
+lmod_dl="https://downloads.sourceforge.net/project/lmod/Lmod-7.7.tar.bz2"
+lmod_ver=Lmod-7.7
