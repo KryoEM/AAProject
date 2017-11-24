@@ -5,7 +5,9 @@
     state: latest
     update_cache: yes
   with_items:
-    - liblua5.1-0
-    - liblua5.1-0-dev
-    - lua5.1
+    - liblua5.2-0
+    - liblua5.2-dev
+    - lua5.2
+    - lua-filesystem-dev
+    - lua-posix
   become: yes
