@@ -29,21 +29,32 @@
   roles:
     - shared_imod
     
+# Don't install LMOD in this playbook, we have a separate playbook for it    
 #- name: Install Lmod
 #  hosts: installer
 #  roles:
 #    - shared_lmod
 
 
-# set up the environment variables for all machines
-- name: Set up the environment variables for all machines
+# TODO: Replace this with SLURM
+- name: Set up relion hostfile
   hosts: machines
   roles:
     - relion_hostfile
-    - relion_env
-    - imod_env
-    - python_env
 
+# set up the environment variables for all machines
+# we used to do this with profile.d scripts, but now we use LMOD
+# - name: Set up the environment variables for all machines
+#   hosts: machines
+#   roles:
+#     - relion_hostfile
+#     - relion_env
+#     - imod_env
+#     - python_env
+- name: Set up modulefile for this version of RELION
+  hosts: machines
+  roles:
+    - shared_module
 
 - name: Sanity check
   hosts: installer

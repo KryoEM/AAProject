@@ -159,3 +159,9 @@ python_dir: "{{shared_dir}}python/"
 anaconda_installer: "{{ anaconda_ver }}.sh"
 anaconda_install_dir: "{{ python_dir }}{{ anaconda_ver }}/"
 python_bin: "{{ anaconda_install_dir }}bin"
+
+
+
+
+# ===================== LMOD VARIABLES ==========================
+modules_dir: "{{ shared_dir }}lmod/lmod/modulefiles/Core/"

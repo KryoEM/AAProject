@@ -19,9 +19,14 @@
     pattern: "*.exe"
   register: summovie_find_exe
 
-
-- name: Setup local Relion environment variables
+- name: Add modulefile to LMOD
   template:
-    src: "relion.sh.j2"
-    dest: "{{ profile_dir }}relion.sh"
+    src: "relion.lua.j2"
+    dest: "{{ modules_dir }}{{ relion_ver }}.lua"
   become: yes
+
+# - name: Setup local Relion environment variables
+#   template:
+#     src: "relion.sh.j2"
+#     dest: "{{ profile_dir }}relion.sh"
+#   become: yes
