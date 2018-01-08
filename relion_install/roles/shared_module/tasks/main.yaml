@@ -1,0 +1,27 @@
+---
+- name: Find Cuda path
+  shell: echo `which nvcc`
+  environment:
+    PATH: "{{ansible_env.PATH}}:{{ local_bin }}"
+    LD_LIBRARY_PATH: "{{ local_lib }}"
+  register: echo_which_nvcc
+
+
+- name: Find Unblur executable name
+  find:
+    paths: "{{ unblur_ver_dir }}bin"
+    pattern: "*.exe"
+  register: unblur_find_exe
+
+- name: Find Summovie executable name
+  find:
+    paths: "{{ summovie_ver_dir }}bin"
+    pattern: "*.exe"
+  register: summovie_find_exe
+
+
+- name: Setup local Relion environment variables
+  template:
+    src: "relion.sh.j2"
+    dest: "{{ profile_dir }}relion.sh"
+  become: yes

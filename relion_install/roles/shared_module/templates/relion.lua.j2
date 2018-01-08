@@ -1,0 +1,34 @@
+local version = "2.0.4"
+local imod_base = "{{ imod_install_dir }}IMOD"
+
+-- Dependencies
+-- load("CUDA/8.0")
+
+-- Environment
+prepend_path("PATH", "{{ relion_bin }}")
+prepend_path("PATH", "{{ relion_python_dir }}")
+prepend_path("PATH", imod_base .. "/bin")
+prepend_path("PATH", "{{ python_bin }}") -- necessary for anaconda
+prepend_path("PYTHONPATH", "{{ relion_python_dir }}")
+prepend_path("LD_LIBRARY_PATH", "{{ relion_lib }}")
+prepend_path("LD_LIBRARY_PATH", imod_base .. "/lib")
+
+setenv("CUDA_HOME", "{{ echo_which_nvcc.stdout|replace('/bin/nvcc','') }}")
+setenv("RELION_PDFVIEWER_EXECUTABLE", "evince")
+setenv("RELION_MOTIONCORR_EXECUTABLE", "{{ motioncorr_exe_path }}")
+setenv("RELION_UNBLUR_EXECUTABLE", "{{ unblur_find_exe.files[0].path }}")
+setenv("RELION_SUMMOVIE_EXECUTABLE", "{{ summovie_find_exe.files[0].path }}")
+setenv("RELION_CTFFIND_EXECUTABLE", "{{ ctffind4_exe_path }}")
+setenv("RELION_GCTF_EXECUTABLE", "{{ gctf_exe_path }}")
+setenv("RELION_RESMAP_EXECUTABLE", "{{ resmap_exe_path }}")
+setenv("RELION_DEFAULT_HOSTFILE", "{{ relion_default_hostfile }}")
+setenv("RELION_DEFAULT_CPU_HOSTFILE", "{{ relion_default_hostfile_cpu }}")
+setenv("IMOD_DIR", imod_base)
+setenv("IMOD_JAVADIR", "/usr/local/java")
+setenv("IMOD_PLUGIN_DIR", imod_base .. "/lib/imodplug")
+setenv("IMOD_CALIB_DIR", "/usr/local/ImodCalib")
+setenv("FOR_DISABLE_STACK_TRACE", "1")
+setenv("IMOD_QTLIBDIR", imod_base .. "/qtlib")
+
+-- possible TODO: we don't use this, but imod has a config directory that sources some optional scripts (disabled by default)
+-- this modulefile doesn't take those into consideration
